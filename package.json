@@ -10,7 +10,6 @@
     "login": "mysql -u root -p",
     "twitterscript": "node server/spec/twitterScript.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "watch": "babel . --out-dir compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
     "dev-react": "webpack -d --watch"
   },
   "repository": {
