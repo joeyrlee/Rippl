@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/teamPupAndSuds/teamPupAndSuds#readme",
   "dependencies": {
-    "auth0-lock": "^10.10.2",
+    "auth0-lock": "^10.11.0",
     "axios": "^0.15.3",
     "babel-core": "^6.7.7",
     "babel-loader": "^6.2.10",
