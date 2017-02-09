@@ -7,6 +7,7 @@ var axios = require('axios');
 var Score = require('../db/index.js').Score;
 
 module.exports = {
+  // KG: I believe they just put twitterHandle as first argument just to get it in scope for callback
   getSentiment: (twitterHandle, tweets, callback) => {
     axios.get('https://api.havenondemand.com/1/api/async/analyzesentiment/v2', {
       params: {

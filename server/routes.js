@@ -1,11 +1,20 @@
 var controller = require('./controllers');
 
 module.exports = function(app, express) {
-  app.get('/analyze', controller.getAnalysis);
+  app.get('/analyzeUser', controller.getUserAnalysis);
+  // app.post('/analyzeUser', controller.getUserAnalysis);
+  app.get('/analyzeTopic', controller.getTopicAnalysis);
+  // app.post('/analyzeTopic', controler.getUserAnalysis);
+
+
   app.get('/verify', controller.getRequestToken);
   app.get('/oauth', controller.getAccessToken);
   app.get('/rippl/user/:username', controller.getUserScores);
+  
+
   app.get('/testuser', controller.createTestUser);
+
+  // app.get('/twitter', controller.twitterGetTopic);
 
   app.get('/home', function(req, res) {
     console.log('here');
