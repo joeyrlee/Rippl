@@ -6,11 +6,17 @@ class StatsFoot extends React.Component{
   	super(props);
   }
 
+  handleClick() {
+
+    window.localStorage.removeItem('id_token');
+
+  }
+
   render(){
   	return(
   	  <Footer
         moreLinks={
-          <a className="grey-text text-lighten-4 right" href="#!">Rippl</a>
+          <a onClick={this.handleClick()} className="grey-text text-lighten-4 right" href="#!">Logout</a>
         }
         links={
           <ul>
