@@ -1,7 +1,6 @@
 var twitterUtil = require('../utility/util-twtr.js');
 var havenUtil = require('../utility/util-haven.js');
 var Promise = require('bluebird');
-var $ = require('jquery');
 var {Score} = require('../db/index.js');
 var {User} = require('../db/index.js');
 
