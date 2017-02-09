@@ -41,5 +41,8 @@ bower_components/
 ## API keys ##
 server/config/twitter.js
 server/config/haven.js
-public/components/utils/Api.jsx
 server/config/auth0config.js
+
+# Bundle #
+public/styles/bundle.js
+public/components/utils/Api.jsx
