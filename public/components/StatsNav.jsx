@@ -9,7 +9,7 @@ class StatsNav extends React.Component{
     this.state = {
       selected: 'twitterHandle',
       labels: { //can be: Twitter Handle, Topic, or Location
-        'twitterHandle': 'Twitter Handle', 
+        'twitterHandle': 'Twitter Handle',
         'topic': 'Topic',
         'location': 'Location'
       },
@@ -37,23 +37,29 @@ class StatsNav extends React.Component{
         <NavItem href='/'>
           <img src='../img/rippl-sml.png' className='brand-logo left ripplnav'/>
         </NavItem>
+        <NavItem>
+          <img src={JSON.parse(window.localStorage.profile).picture}/>
+        </NavItem>
+        <NavItem>
+          {'Hi ' + JSON.parse(window.localStorage.profile).name}
+        </NavItem>
 
         <NavItem>
           <Dropdown trigger={
             <Button className=''>Search Type:</Button>
           }>
             <div>
-              <Input 
+              <Input
                 name='group1'
                 type='radio'
                 value='twitterHandle'
                 label='Twitter Handle'
-                className='left with-gap' 
+                className='left with-gap'
                 id='userRadioButton'
                 onClick={this.handleRadioSelect.bind(this)}
               />
               <NavItem divider />
-              <Input 
+              <Input
                 name='group1'
                 type='radio'
                 value='topic'
@@ -62,12 +68,12 @@ class StatsNav extends React.Component{
                 onClick={this.handleRadioSelect.bind(this)}
               />
               <NavItem divider />
-              <Input 
+              <Input
                 name='group1'
                 type='radio'
                 value='location'
                 label='Location'
-                className='left with-gap' 
+                className='left with-gap'
                 onClick={this.handleRadioSelect.bind(this)}
               />
             </div>
@@ -78,7 +84,7 @@ class StatsNav extends React.Component{
         {this.props.error ? <NavItem>Invalid Twitter Handle</NavItem> : ''}
 
         <NavItem>
-          <Input 
+          <Input
             onChange={this.props.formChange}
             label={this.state.labels[this.state.selected]}
             value={this.props.formVal}
@@ -88,8 +94,8 @@ class StatsNav extends React.Component{
         </NavItem>
 
         <NavItem>
-          <Button 
-            onClick={this.handleClick.bind(this)} 
+          <Button
+            onClick={this.handleClick.bind(this)}
             waves='light'>Get Score
           </Button>
         </NavItem>
