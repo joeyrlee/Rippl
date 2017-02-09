@@ -10,6 +10,10 @@ Once you have API keys, please remove the .example from haven.example.js and twi
 
 Once you have those two files setup, run npm install to get all the required packages.
 
+Create a MySQL database with: 
+```javascript
+CREATE DATABASE rippl;
+```
 Then run 
 ```javascript
 npm run server
@@ -24,23 +28,21 @@ Finally, run
 ```javascript
 npm run twitterscript
 ```
-Once all these commands have been ran, navigate to localhost:3000 to use the app.  From here, you are able to get a Rippl score for any twitter user.
+Once all these commands have been run, navigate to localhost:3000 to use the app.  From here, you are able to get a Rippl score for any twitter user.
 
 
-                     React Component Tree:      index.jsx
-                      								|
-                      							  Stats
-                      							  	|
-                      				 StatsNav - StatsBody - StatsFoot
-                      				     |			|
-                      				StatSpinner		|		
-                      								|
-                      							StatsCard
-                      								|
-                      							 StatsBox
-                      							    |
+            React Component Tree:      index.jsx
+                      				    				|
+                      				  			  Stats
+                      				  			  	|
+                      		 StatsNav - StatsBody - StatsFoot
+                      			 	 |	       	|
+                      		StatSpinner		  |		
+                      				  		  		|
+                      					  	 	StatsCard
+                      					  	  		|
+                      					  		 StatsBox
+                      						  	    |
                       						   StatSpinner
-
-
 
 React-Materialize components: Navbar, NavItem, Col, Row, Card, CardPanel, Input, Icon, Button, Preloader, Footer
