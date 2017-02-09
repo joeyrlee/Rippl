@@ -22,7 +22,7 @@ export default class AuthService {
       if (error) {
         console.log('Error loading the Profile', error)
       } else {
-        this.setProfile(profile)
+        // this.setProfile(profile)
       }
     });
   }
