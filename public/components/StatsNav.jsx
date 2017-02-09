@@ -21,6 +21,13 @@ class StatsNav extends React.Component{
         </NavItem>
           {this.props.spinner ? <NavItem><StatSpinner /></NavItem> : ''}
           {this.props.error ? <NavItem>Invalid Twitter Handle</NavItem> : ''}
+          <NavItem>
+          <img src={JSON.parse(window.localStorage.profile).picture} />
+
+        </NavItem>
+        <NavItem>
+         {'Hi ' + JSON.parse(window.localStorage.profile).name}
+        </NavItem>
         <NavItem>
           <Input onChange={this.props.formChange} label="New User" value={this.props.formVal}><Icon>account_circle</Icon></Input>
         </NavItem>
