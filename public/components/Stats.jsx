@@ -9,15 +9,15 @@ class Stats extends React.Component{
   	super(props);
 
     this.state = {
-      query: '',
-      queryType: '', // twitterHandle, location, or topic
+      query: '', //entered text
+      queryType: 'twitterHandle', //twitterHandle, topic, or location
       list: [],
       spinner: false
     }
 
-
     this.getData = this.getData.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
     this.queryUser = this.queryUser.bind(this);
     this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
     this.queryTopic = this.queryTopic.bind(this);
@@ -34,7 +34,7 @@ class Stats extends React.Component{
       url: 'http://localhost:3000/rippl/user/RipplMaster',
       dataType: 'json',
       success: function(data) {
-        // console.log('success! ' + {data});
+        console.log('success! ', data);
         context.setState({list: data.reverse(), spinner: false, error: false});
       },
       error: function(err){
@@ -53,17 +53,15 @@ class Stats extends React.Component{
 
   // Handles changes in the input tag
   handleChange(event) {
-    // console.log('handleChange', event.target.value);
     this.setState({query: event.target.value});
     var context = this;
     console.log(context.state.query);
   }
 
-  //Handles change in the search type
+  //handles search type change (radio button selection)
   handleSearchTypeChange(event) {
-    console.log()
+    this.setState({'queryType': event.target.value});
   }
-
 
   // This function gets tells the server to get the data for the a specified user,
   // starts the spinner animation, and if there is an error displays an error message.
@@ -118,14 +116,21 @@ class Stats extends React.Component{
     });
   }
 
-    render() {
-      return(
-        <div>
-          <StatsNav error={this.state.error} spinner={this.state.spinner} formVal={this.state.query} getUserClick={this.queryUser} formChange={this.handleChange}/>
-          <StatsBody list={this.state.list}/>
-          <StatsFoot />
-        </div>
-      );
-    }
+  render() {
+    return(
+      <div>
+        <StatsNav 
+          error={this.state.error} 
+          spinner={this.state.spinner} 
+          formVal={this.state.query} 
+          getUserClick={this.queryUser} 
+          formChange={this.handleChange}
+          handleSearchTypeChange={this.handleSearchTypeChange}
+        />
+        <StatsBody list={this.state.list} />
+        <StatsFoot />
+      </div>
+    );
+  }
 }
 export default Stats;
