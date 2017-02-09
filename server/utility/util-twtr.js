@@ -17,6 +17,10 @@ var twtrGetReqTokenAsync = Promise.promisify(twitter.getRequestToken, {context: 
 var twtrGetAccessTokenAsync = Promise.promisify(twitter.getAccessToken, {context: twitter, multiArgs: true});
 var twtrVerifyCredentialsAsync = Promise.promisify(twitter.verifyCredentials, {context: twitter, multiArgs: true});
 var twtrGetTimelineAsync = Promise.promisify(twitter.getTimeline, {context: twitter, multiArgs: true});
+// KG: testing out...
+var twtrSearchAsync = Promise.promisify(twitter.search, {context: twitter, multiArgs: true});
+
+
 
 module.exports = {
   getTweets: function(username, callback) {
@@ -30,7 +34,37 @@ module.exports = {
       console.error('Timeline retrieval error ', err);
       callback(err);
     });
+  },
 
+//KG: Working Here
+  getTweetsByTopic: function(topic, callback) {
+    console.log("getTweetsByTopic called in util-twtr.js")
+    let accessToken = twitter.accessToken;
+    let accessTokenSecret = twitter.accessTokenSecret;
+    console.log('got to line 44 -- about to fail')
+    console.log(callback);
+    // KG: Attempting without promises...
+    twitter.search({'q': topic}, accessToken, accessTokenSecret, function(err, data, response) {
+      console.log('twitter search just returned');
+      if (err) {
+        console.log('getTweetsByTopic failed');
+        return console.error(err)
+      } else {
+        console.log('getTweetsByTopic success');
+        return callback(err, data, response);
+      }
+    })
+
+    // KG: Reimplement Async?
+    // twtrSearchAsync('tweets', {'q': topic}, accessToken, accessTokenSecret)
+    // .spread((data, response) => {
+    //   console.log('about ot do callback');
+    //   callback(null, data, response);
+    // })
+    // .catch((err) => {
+    //   console.error('Error retrieving tweets by topic', err);
+    //   callback(err);
+    // });
   },
 
   getRequestToken: function(req, res) {
@@ -98,6 +132,17 @@ module.exports = {
     string = string.replace(/[^\x00-\x7F]/g, '');
 
     return {string, favoriteCount, retweetCount};
+  },
+
+  getTweetStringForTopic: function(tweetJSON) {
+    let string = '';
+    tweetJSON.statuses.forEach((tweet) => {
+      string+= tweet.text + ' ';
+    })
+
+    string = string.replace(/[^\x00-\x7F]/g, '');
+
+    return string;
   },
 
   twitter: twitter
