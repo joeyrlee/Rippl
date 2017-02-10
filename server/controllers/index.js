@@ -75,6 +75,7 @@ module.exports = {
     var topic = req.query.topic
     var twitterHandle = req.query.location
     var clientUserName = req.query.clientUserName
+    globalClientUserName = clientUserName
 
     console.log('topic ===>', topic);
     console.log('location ===>', location);
@@ -94,13 +95,9 @@ module.exports = {
     })
     .then((sentiment) => {
       globalsentiment = sentiment;
-      console.log('response ==>', sentiment);
-      console.log('clientUserName === >');
-      console.log(clientUserName)
-      return User.findOne({username: clientUserName});
+      return User.findOne({where: {username: clientUserName}});
     })
     .then(function(user) {
-      console.log(' ', ' ', 'CREATING SCORE');
       return Score.create({
         topic: topic,
         location: location,
