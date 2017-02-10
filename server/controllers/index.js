@@ -75,6 +75,7 @@ module.exports = {
     var topic = req.query.topic
     var twitterHandle = req.query.location
     var clientUserName = req.query.clientUserName
+
     console.log('topic ===>', topic);
     console.log('location ===>', location);
     console.log('---------------------------------------------');
