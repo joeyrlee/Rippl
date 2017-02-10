@@ -14,15 +14,20 @@ class StatsCard extends React.Component{
   }
 
   getTitle() {
+    //create a capitalization prettifier for titles
+    var capitalizer = str => {
+      return str[0].toUpperCase() + str.slice(1).toLowerCase();
+    }
+
     //if the sentiment score is for a user
     if (this.props.user.twitterHandle) {
-      return '@' + this.props.user.twitterHandle;
+      return '@' + capitalizer(this.props.user.twitterHandle);
     //if the sentiment score is for a topic
     } else if (this.props.user.topic) {
-      return this.props.user.topic;
+      return capitalizer(this.props.user.topic);
     //else the sentiment score must be for a location
     } else {
-      return this.props.user.location;
+      return capitalizer(this.props.user.location);
     }
   }
 

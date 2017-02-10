@@ -24,10 +24,10 @@ class StatsCard extends React.Component{
                style={{color:this.props.color,
                        display:'inline-block',
                        width: '1250px'}}
-               >Rippl Score: {
-                this.props.score 
-                ? Math.floor(this.props.score * 1000) 
-                : this.inactiveUser()}
+                >Rippl Score: {
+                  this.props.score 
+                  ? Math.floor(this.props.score * 1000) 
+                  : this.inactiveUser()}
             </p>
           </Col>
         </Row>
