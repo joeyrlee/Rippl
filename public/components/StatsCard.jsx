@@ -39,7 +39,7 @@ class StatsCard extends React.Component{
     } else {
       https://twitter.com/search?q=san%20francisco&src=typd
       return 'https://twitter.com/search?q='
-        //IIFE to convert space delimited city names to '%20' dilimited strings
+        //IIFE to convert space delimited city names to '%20' delimited strings
         + (()=>this.props.user.location.split(' ').join('%20'))()
         + '&src=typd'
     }

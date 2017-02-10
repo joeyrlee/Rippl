@@ -10,7 +10,9 @@ class Stats extends React.Component{
 
     this.state = {
       query: '', //entered text
+      // location: '33.517269,-86.808293,10km',
       queryType: 'twitterHandle', //twitterHandle, topic, or location
+      location: undefined,
       list: [],
       spinner: false
     }
@@ -34,6 +36,7 @@ class Stats extends React.Component{
       url: 'http://localhost:3000/rippl/user/RipplMaster',
       dataType: 'json',
       success: function(data) {
+        console.log('success!');
         context.setState({list: data.reverse(), spinner: false, error: false});
       },
       error: function(err){
@@ -88,6 +91,7 @@ class Stats extends React.Component{
       data: query,
       success: function(data){
         context.getData();
+        console.log('queryUser succeeded')
       },
       error: function(err){
         context.setState({spinner: false, error: true});
@@ -102,7 +106,8 @@ class Stats extends React.Component{
     this.setState({spinner: true, error: false});
     var context = this;
     var query = {
-      topic: this.state.query
+      topic: this.state.query,
+      location: this.state.location
     };
     this.setState({query: ''});
     $.ajax({
@@ -139,10 +144,6 @@ class Stats extends React.Component{
         />
         <StatsBody 
           list={this.state.list}
-          queryType={this.state.queryType}
-          getUserClick={this.queryUser} 
-          formChange={this.handleChange}
-          handleSearchTypeChange={this.handleSearchTypeChange}
         />
         <StatsFoot />
       </div>
