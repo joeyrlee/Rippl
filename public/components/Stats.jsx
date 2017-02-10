@@ -104,18 +104,17 @@ class Stats extends React.Component{
 
   // Ajax request to the server to get the data for the specified TOPIC,
   // Also starts the spinner animation, and if there is an error, displays an error message.
-  queryTopic(clientUserName) {
+  queryTopic() {
+    console.log(JSON.parse(window.localStorage.profile).screen_name)
     this.setState({spinner: true, error: false});
-    console.log('queryTopic called')
-    console.log(clientUserName);
+    var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
+    console.log('defined clientUserName')
     var context = this;
     var query = {
       topic: this.state.query,
       location: this.state.location,
       clientUserName: clientUserName
     };
-    // console.log('query ==> ');
-    // console.log(query);
     this.setState({query: ''});
     $.ajax({
       method: 'GET',
