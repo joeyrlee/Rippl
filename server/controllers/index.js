@@ -131,11 +131,10 @@ module.exports = {
   getUserScores: function(req, res, next) {
     // console.log('Username param: ' + req.params.username);
     let username = req.params.username || 'RipplMaster';
-    console.log('getUserScores: ',username)
     User.findOrCreate({where: { username: username }})
-
     .then(function(user) {
-      return Score.findAll({UserId: user.id});
+      var userID = user[0].dataValues.id;
+      return Score.findAll({where: {UserId: userID}});
     })
     .then(function(scores) {
       res.status(200).json(scores);
