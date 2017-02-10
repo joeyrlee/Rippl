@@ -24,7 +24,7 @@ body {
 
 /*Overwrites title color of cards*/
 .card-title.grey-text.text-darken-4 {
-  color: #ffab40 !important
+  color: #ffab40 !important;
 }
 
 /*Spinner positioning*/
