@@ -41,7 +41,6 @@ module.exports = {
     })
     .then(function(user) {
       console.log('CREATING SCORE');
-      // console.log(user, '---------------------');
       // Work here
       return Score.create({
         twitterHandle: twitterHandle,
@@ -81,7 +80,7 @@ module.exports = {
     var globaldata, globaltweetData, globalsentiment, globaluser;
 
     console.log('KG: About to do API request')
-    
+
     getTweetsByTopicAsync(topic)
     .spread((data, response) => {
       console.log('inside .spread of getTweetsByTopicAsync in controller');
@@ -97,7 +96,7 @@ module.exports = {
       // globaltweetData = twitterUtil.getTweetString(globaldata);
 
       console.log('finished getTweetString')
-      // Need to look into handling haven asynchronously 
+      // Need to look into handling haven asynchronously
       return getSentimentAsync(twitterHandle, globalTweetString);
     })
     .then((sentiment) => {
@@ -140,8 +139,8 @@ module.exports = {
   getUserScores: function(req, res, next) {
     console.log('Username param: ' + req.params.username);
     let username = req.params.username || 'RipplMaster';
-    console.log(username);
-    User.find({where: { username: username }})
+    //User.find({where: { username: username }})
+    User.findOrCreate({where: { username: username }})
     .then(function(user) {
       console.log('USER :', user);
       return Score.findAll({UserId: user.id});
