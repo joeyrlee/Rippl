@@ -37,20 +37,20 @@ module.exports = {
   },
 
 //KG: Working Here
-  getTweetsByTopic: function(topic, callback) {
+  getTweetsByTopic: function(topic, location, callback) {
     console.log("getTweetsByTopic called in util-twtr.js")
+    console.log('topic = ' + topic + ' location = ' + location);
     let accessToken = twitter.accessToken;
     let accessTokenSecret = twitter.accessTokenSecret;
-    console.log('got to line 44 -- about to fail')
-    console.log(callback);
     // KG: Attempting without promises...
-    twitter.search({'q': topic}, accessToken, accessTokenSecret, function(err, data, response) {
+    twitter.search({'q': topic, 'geocode': location}, accessToken, accessTokenSecret, function(err, data, response) {
       console.log('twitter search just returned');
       if (err) {
         console.log('getTweetsByTopic failed');
         return console.error(err)
       } else {
         console.log('getTweetsByTopic success');
+        console.log(data);
         return callback(err, data, response);
       }
     })
