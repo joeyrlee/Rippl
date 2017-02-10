@@ -68,27 +68,24 @@ module.exports = {
 
   getTopicAnalysis: function(req, res, next) {
     console.log('getTopicAnalysis CALLED');
+    console.log(req.query);
 
     // reads topic off query string
     var location = req.query.location
     var topic = req.query.topic
     var twitterHandle = req.query.location
+    var clientUserName = req.query.clientUserName
 
     console.log('topic ===>', topic);
     console.log('location ===>', location);
-
-    var currentUser = req.params.user || 'RipplMaster';
-    var globaldata, globaltweetData, globalsentiment, globaluser;
-
-    console.log('KG: About to do API request')
-
+    console.log('clientUserName ===>', clientUserName);
 
     getTweetsByTopicAsync(topic, location) //(...args)
     .spread((data, response) => {
       console.log('inside .spread of getTweetsByTopicAsync in controller');
       globaldata = data;
       globalTweetString = twitterUtil.getTweetStringForTopic(globaldata);
-      console.log('tweetString ==> ', globalTweetString)
+      // console.log('tweetString ==> ', globalTweetString)
       // globaltweetData = twitterUtil.getTweetString(globaldata);
 
       console.log('finished getTweetString')
@@ -98,10 +95,12 @@ module.exports = {
     .then((sentiment) => {
       globalsentiment = sentiment;
       console.log('response ==>', sentiment);
-      return User.findOne({username: currentUser});
+      console.log('clientUserName === >');
+      console.log(clientUserName)
+      return User.findOne({username: clientUserName});
     })
     .then(function(user) {
-      console.log('CREATING SCORE');
+      console.log(' ', ' ', 'CREATING SCORE');
       return Score.create({
         topic: topic,
         location: location,
@@ -116,7 +115,7 @@ module.exports = {
       return res.status(200).json(newScore);
     })
     .catch((err) => {
-      console.error('Analysis error ', err);
+      console.log('Analysis error ');
       return res.status(404).end();
     });
   },
@@ -134,12 +133,11 @@ module.exports = {
   },
 
   getUserScores: function(req, res, next) {
-    console.log('Username param: ' + req.params.username);
+    // console.log('Username param: ' + req.params.username);
     let username = req.params.username || 'RipplMaster';
-    //User.find({where: { username: username }})
+
     User.findOrCreate({where: { username: username }})
     .then(function(user) {
-      console.log('USER :', user);
       return Score.findAll({UserId: user.id});
     })
     .then(function(scores) {

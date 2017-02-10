@@ -25,7 +25,6 @@ class Stats extends React.Component{
     this.queryTopic = this.queryTopic.bind(this);
   }
 
-
   // This function gets all the user data for user RipplMaster (default user),
   // stops the spinner animation, and if there is an error displays an error message.
   getData() {
@@ -67,6 +66,9 @@ class Stats extends React.Component{
     this.setState({'queryType': event.target.value});
   }
 
+
+
+
   // This function gets tells the server to get the data for the a specified user,
   // starts the spinner animation, and if there is an error displays an error message.
   queryUser() {
@@ -94,14 +96,18 @@ class Stats extends React.Component{
     });
   }
 
-  queryTopic() {
+  queryTopic(clientUserName) {
     this.setState({spinner: true, error: false});
     console.log('queryTopic called')
+    console.log(clientUserName);
     var context = this;
     var query = {
       topic: this.state.query,
-      location: this.state.location
+      location: this.state.location,
+      clientUserName: clientUserName
     };
+    // console.log('query ==> ');
+    // console.log(query);
     this.setState({query: ''});
     $.ajax({
       method: 'GET',
