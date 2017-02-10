@@ -43,7 +43,7 @@ module.exports = {
     let accessToken = twitter.accessToken;
     let accessTokenSecret = twitter.accessTokenSecret;
     // KG: Attempting without promises...
-    twitter.search({'q': topic, 'geocode': location}, accessToken, accessTokenSecret, function(err, data, response) {
+    twitter.search({'q': topic, 'geocode': location, count: 50}, accessToken, accessTokenSecret, function(err, data, response) {
       console.log('twitter search just returned');
       if (err) {
         console.log('getTweetsByTopic failed');
