@@ -1,7 +1,7 @@
 var controller = require('./controllers');
 
 module.exports = function(app, express) {
-  app.get('/analyzeUser', controller.getUserAnalysis);
+  app.get('/analyzeUser', controller.getHandleAnalysis);
   // app.post('/analyzeUser', controller.getUserAnalysis);
   app.get('/analyzeTopic', controller.getTopicAnalysis);
   // app.post('/analyzeTopic', controler.getUserAnalysis);

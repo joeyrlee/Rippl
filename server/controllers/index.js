@@ -11,8 +11,8 @@ var getTweetsByTopicAsync = Promise.promisify(twitterUtil.getTweetsByTopic, {con
 var getSentimentAsync = Promise.promisify(havenUtil.getSentiment, {context: havenUtil});
 
 module.exports = {
-  getUserAnalysis: function(req, res, next) {
-    console.log('getUserAnalysis CALLED');
+  getHandleAnalysis: function(req, res, next) {
+    console.log('getHandleAnalysis CALLED');
 
     // reads twitterHandle off query string
     var twitterHandle = req.query.handle //|| 'defaultTwitterHandle';
