@@ -75,11 +75,7 @@ module.exports = {
     var topic = req.query.topic
     var twitterHandle = req.query.location
     var clientUserName = req.query.clientUserName
-<<<<<<< 5085155b91874fe5c2ff2438b6a1a8b311690d25
-    globalClientUserName = clientUserName
-=======
->>>>>>> (feature) uses client username rather than hardcoded on getTopic request
-
+    
     console.log('topic ===>', topic);
     console.log('location ===>', location);
     console.log('clientUserName ===>', clientUserName);
