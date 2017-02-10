@@ -28,7 +28,6 @@ class Stats extends React.Component{
   // This function gets all the user data for user RipplMaster (default user),
   // stops the spinner animation, and if there is an error displays an error message.
   getData() {
-    console.log('getting DATA');
     var context = this;
     $.ajax({
       method: 'GET',
@@ -77,7 +76,6 @@ class Stats extends React.Component{
   // Also starts the spinner animation, and if there is an error, displays an error message.
   queryUser() {
     this.setState({spinner: true, error: false});
-    console.log('querying USER')
     var context = this;
     var query = {
       handle: this.state.query
