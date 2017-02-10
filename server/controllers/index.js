@@ -19,6 +19,7 @@ module.exports = {
 
     var globaldata, globaltweetData, globalsentiment;
 
+
     getTweetsAsync(twitterHandle)
     .spread((data, response) => {
       globaldata = data;
@@ -32,6 +33,7 @@ module.exports = {
     })
     .then(function(user) {
       console.log('CREATING SCORE');
+
       return Score.create({
         twitterHandle: twitterHandle,
         numTweets: globaldata.length,
