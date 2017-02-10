@@ -10,8 +10,6 @@ module.exports = function(app, express) {
   app.get('/verify', controller.getRequestToken);
   app.get('/oauth', controller.getAccessToken);
   app.get('/rippl/user/:username', controller.getUserScores);
-  
-
   app.get('/testuser', controller.createTestUser);
 
   // app.get('/twitter', controller.twitterGetTopic);

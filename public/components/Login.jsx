@@ -18,12 +18,8 @@ export class Login extends React.Component {
         <ButtonToolbar>
           <Button bsStyle="primary" onClick={auth.login.bind(this)}>Login</Button>
         </ButtonToolbar>
-      </div>
-
-    )
-
+      </div> )
   }
 }
-
 
 export default Login;

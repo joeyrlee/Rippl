@@ -8,7 +8,7 @@ export class Container extends React.Component {
     if(this.props.children) {
       children = React.cloneElement(this.props.children, {
         auth: this.props.route.auth
-      })
+      });
     }
    return (
     <Jumbotron>
