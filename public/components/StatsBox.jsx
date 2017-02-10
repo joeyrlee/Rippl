@@ -15,7 +15,7 @@ class StatsCard extends React.Component{
   }
 
   render(){
-    console.log("StatsBox");
+    // console.log("StatsBox");
   	return (
       <div className="statsbox">
         <Row>
