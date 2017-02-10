@@ -2,8 +2,8 @@ import StatsCard from './StatsCard.jsx';
 import { Navbar, NavItem } from 'react-materialize';
 
 // This is the component that represents the part of the page where the user cards are loaded
-class StatsBody extends React.Component{
-  constructor(props){
+class StatsBody extends React.Component {
+  constructor(props) {
   	super(props);
   }
 

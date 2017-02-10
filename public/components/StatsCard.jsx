@@ -66,18 +66,20 @@ class StatsCard extends React.Component{
   getScoreColor() {
     let score = this.props.user.sentimentScore;
 
+    //high color = green
     if (score * 1000 >= 600) {
       return '#8bc34a';
+    //medium color = yellow
     } else if (score < 600 && score > 0) {
       return 'yellow';
-      //if score couldn't be retrieved or yielded no rating
+    //if score couldn't be retrieved or yielded no rating color = white
     } else if (score === 0) {
       return 'white';
+    //else color = red
     } else {
       return 'red';
     }
   }
-
   render(){
   	return (
       <Col m={6} s={12}>
@@ -96,6 +98,11 @@ class StatsCard extends React.Component{
         </Card>
       </Col>
     );
+   //  		<Card className='blue-grey darken-1 white-text' textClassName='white-text' title={this.props.user.twitterHandle} actions={[<a href={'http://twitter.com/' + this.props.user.twitterHandle}>To Twitter</a>]}>
+   //  			<StatsBox score={this.props.user.sentimentScore} retweet={this.props.user.retweetCount} color={this.getScoreColor()} />
+   //  		</Card>
+			// </Col>
+  	// );
   }
 }
 

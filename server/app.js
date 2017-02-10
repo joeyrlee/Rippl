@@ -40,9 +40,6 @@ app.set('port', 3000);
 // Set up our routes
 require('./routes.js')(app, express);
 
-
-
-
 // If we are being run directly, run the server.
 if (!module.parent) {
   app.listen(app.get('port'));

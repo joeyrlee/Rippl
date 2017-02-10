@@ -5,7 +5,7 @@ import StatSpinner from './StatSpinner.jsx'
 
 // This is the component that represents the main body of the page
 class Stats extends React.Component{
-  constructor(props){
+  constructor(props) {
   	super(props);
 
     this.state = {
@@ -30,10 +30,13 @@ class Stats extends React.Component{
   // This function gets all the user data for user RipplMaster (default user),
   // stops the spinner animation, and if there is an error displays an error message.
   getData() {
+    // console.log('getting DATA');
+    var username = JSON.parse(window.localStorage.profile).screen_name;
+    // console.log('32', username);
     var context = this;
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3000/rippl/user/RipplMaster',
+      url: 'http://localhost:3000/rippl/user/'+username,
       dataType: 'json',
       success: function(data) {
         console.log('success!');
@@ -128,7 +131,7 @@ class Stats extends React.Component{
   // Ajax request to the server to get the data for the specificed LOCATION,
   // Also starts the spinner animation, and if there is an error, displays an error message.
   queryLocation() {
-
+    
   }
 
   render() {
@@ -138,7 +141,7 @@ class Stats extends React.Component{
           error={this.state.error} 
           spinner={this.state.spinner} 
           formVal={this.state.query} 
-          getUserClick={this.handleQueryType} 
+          getUserClick={this.handleQueryType}
           formChange={this.handleChange}
           handleSearchTypeChange={this.handleSearchTypeChange}
         />

@@ -8,7 +8,6 @@ export default class AuthService {
       auth: {
         redirect: false,
         responseType: 'token'
-        //params: {scope: 'openid profile'}
       }
     })
 
@@ -25,11 +24,9 @@ export default class AuthService {
         console.log('Error loading the Profile', error)
       } else {
          this.setProfile(profile)
-    //   }
         };
       })
   }
-
 
   login() {
     this.lock.show();
