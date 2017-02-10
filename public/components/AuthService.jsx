@@ -6,8 +6,9 @@ export default class AuthService {
   constructor(clientId, domain) {
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirect:false,
+        redirect: false,
         responseType: 'token'
+        //params: {scope: 'openid profile'}
       }
     })
 
@@ -16,19 +17,35 @@ export default class AuthService {
   }
 
   _doAuthentication(authResult) {
+    console.log('result', authResult);
     this.setToken(authResult.idToken)
     browserHistory.replace('/home');
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
         console.log('Error loading the Profile', error)
       } else {
-        // this.setProfile(profile)
-      }
-    });
+         this.setProfile(profile)
+    //   }
+        };
+      })
   }
+
 
   login() {
     this.lock.show();
+  }
+
+  setProfile(profile) {
+    // Saves profile data to local storage
+    localStorage.setItem('profile', JSON.stringify(profile))
+    // Triggers profile_updated event to update the UI
+    //this.emit('profile_updated', profile)
+  }
+
+  getProfile() {
+    // Retrieves the profile data from local storage
+    const profile = localStorage.getItem('profile')
+    return profile ? JSON.parse(localStorage.profile) : {}
   }
 
   loggedIn() {
@@ -45,6 +62,8 @@ export default class AuthService {
 
   logout() {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('profile');
+
   }
 
 }

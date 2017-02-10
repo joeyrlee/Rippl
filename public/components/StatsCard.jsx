@@ -74,7 +74,7 @@ class StatsCard extends React.Component{
   }
 
   render(){
-    return (
+  	return (
       <Col m={6} s={12}>
         <Card
           className='blue-grey darken-1 white-text' 

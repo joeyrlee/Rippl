@@ -18,8 +18,8 @@ class Stats extends React.Component{
     this.getData = this.getData.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
-    this.handleQueryType = this.handleQueryType.bind(this);
     this.queryUser = this.queryUser.bind(this);
+    this.handleQueryType = this.handleQueryType.bind(this);
     this.queryTopic = this.queryTopic.bind(this);
     this.queryLocation = this.queryLocation.bind(this);
   }
@@ -142,6 +142,9 @@ class Stats extends React.Component{
         <StatsBody 
           list={this.state.list}
           queryType={this.state.queryType}
+          getUserClick={this.queryUser} 
+          formChange={this.handleChange}
+          handleSearchTypeChange={this.handleSearchTypeChange}
         />
         <StatsFoot />
       </div>
