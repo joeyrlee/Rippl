@@ -17,9 +17,9 @@ body {
 
 /*StatsBody positioning*/
 .statsbody {
-	padding: 0px 7px 45px 7px;
+	padding: 0px 7px 55px 7px;
 	height: 86vh;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 /*Overwrites title color of cards*/

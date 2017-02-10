@@ -38,12 +38,12 @@ class StatsNav extends React.Component{
           <img src='../img/rippl-sml.png' className='brand-logo left ripplnav'/>
         </NavItem>
 
-        <NavItem>
+        {/*<NavItem>
           <img src={JSON.parse(window.localStorage.profile).picture}/>
         </NavItem>
         <NavItem>
           {'Hi ' + JSON.parse(window.localStorage.profile).name}
-        </NavItem>
+        </NavItem>*/}
 
         <NavItem>
           <Dropdown trigger={
