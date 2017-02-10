@@ -27,7 +27,7 @@ class StatsCard extends React.Component{
 
   render(){
     // console.log(this.props.user.twitterHandle + ' has ' + this.props.user.retweetCount + ' retweets');
-    console.log('this.sentimentScore: ', this.props.user.sentimentScore)
+    // console.log('this.sentimentScore: ', this.props.user.sentimentScore)
   	return (
       <Col m={6} s={12}>
     		<Card className='blue-grey darken-1 white-text' textClassName='white-text' title={this.props.user.twitterHandle} actions={[<a href={'http://twitter.com/' + this.props.user.twitterHandle}>To Twitter</a>]}>

@@ -12,7 +12,7 @@ var getSentimentAsync = Promise.promisify(havenUtil.getSentiment, {context: have
 
 module.exports = {
   getUserAnalysis: function(req, res, next) {
-    console.log('getAnalysis CALLED');
+    console.log('getUserAnalysis CALLED');
 
     // reads twitterHandle off query string
     var twitterHandle = req.query.handle //|| 'defaultTwitterHandle';
@@ -70,27 +70,23 @@ module.exports = {
     console.log('getTopicAnalysis CALLED');
 
     // reads topic off query string
-    var twitterHandle = req.query.handle //|| 'defaultTwitterHandle';
-    var location = req.query.location //|| 'defaultLocation';
-    var topic = req.query.topic //|| 'defaultTopic';
+    var location = req.query.location
+    var topic = req.query.topic
+    var twitterHandle = req.query.location
 
     console.log('topic ===>', topic);
+    console.log('location ===>', location);
 
     var currentUser = req.params.user || 'RipplMaster';
     var globaldata, globaltweetData, globalsentiment, globaluser;
 
     console.log('KG: About to do API request')
 
-    getTweetsByTopicAsync(topic)
+
+    getTweetsByTopicAsync(topic, location) //(...args)
     .spread((data, response) => {
       console.log('inside .spread of getTweetsByTopicAsync in controller');
-      // console.log('data ==> ', data);
-      // console.log('response ==> ', response);
       globaldata = data;
-      // console.log(data.statuses);
-      // console.log(data.statuses.length);
-
-      //KG WORKING FROM HERE
       globalTweetString = twitterUtil.getTweetStringForTopic(globaldata);
       console.log('tweetString ==> ', globalTweetString)
       // globaltweetData = twitterUtil.getTweetString(globaldata);
@@ -108,6 +104,7 @@ module.exports = {
       console.log('CREATING SCORE');
       return Score.create({
         topic: topic,
+        location: location,
         tweetText: globalTweetString,
         sentimentScore: globalsentiment,
       })
