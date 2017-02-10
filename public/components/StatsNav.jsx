@@ -40,11 +40,24 @@ class StatsNav extends React.Component{
         <NavItem href='/'>
           <img src='../img/rippl-sml.png' className='brand-logo left ripplnav'/>
         </NavItem>
+
         <NavItem>
-          <img src={JSON.parse(window.localStorage.profile).picture}/>
+          <div 
+            style={{'height':'50px',
+                    'position':'relative',
+                    'top':'50%',
+                    'transform':'translateY(17%)'}}
+            className='left'
+          >
+            <img
+              src={JSON.parse(window.localStorage.profile).picture}
+            />
+          </div>
         </NavItem>
         <NavItem>
-          {'Hi ' + JSON.parse(window.localStorage.profile).name}
+          <div className='left'>
+            {'Hi ' + JSON.parse(window.localStorage.profile).name}
+          </div>
         </NavItem>
 
         <NavItem>

@@ -21,16 +21,17 @@ class Stats extends React.Component{
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
     this.queryUser = this.queryUser.bind(this);
-    this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
+    this.handleQueryType = this.handleQueryType.bind(this);
     this.queryTopic = this.queryTopic.bind(this);
+    this.queryLocation = this.queryLocation.bind(this);
   }
 
   // This function gets all the user data for user RipplMaster (default user),
   // stops the spinner animation, and if there is an error displays an error message.
   getData() {
-    console.log('getting DATA');
+    // console.log('getting DATA');
     var username = JSON.parse(window.localStorage.profile).screen_name;
-    console.log('32', username);
+    // console.log('32', username);
     var context = this;
     $.ajax({
       method: 'GET',
@@ -43,13 +44,12 @@ class Stats extends React.Component{
       error: function(err){
         context.setState({spinner: false, error: true});
         console.log(err);
-        console.log('didnt work');
       }
     });
   }
 
 
-  // Gets the data on mounting
+  // Gets persisted data in storage on mounting
   componentWillMount(){
     this.getData();
   }
@@ -58,7 +58,6 @@ class Stats extends React.Component{
   handleChange(event) {
     this.setState({query: event.target.value});
     var context = this;
-    console.log(context.state.query);
   }
 
   //handles search type change (radio button selection)
@@ -67,13 +66,21 @@ class Stats extends React.Component{
   }
 
 
+  // Acts as a switch for which query type to call based on the `queryType` state variable
+  handleQueryType() {
+    if (this.state.queryType === 'twitterHandle') {
+      this.queryUser();
+    } else if (this.state.queryType === 'topic') {
+      this.queryTopic();
+    } else {
+      this.queryLocation();
+    }
+  }
 
-
-  // This function gets tells the server to get the data for the a specified user,
-  // starts the spinner animation, and if there is an error displays an error message.
+  // Ajax request to the server to get the data for the specified TWITTERHANDLE,
+  // Also starts the spinner animation, and if there is an error, displays an error message.
   queryUser() {
     this.setState({spinner: true, error: false});
-    console.log('querying USER')
     var context = this;
     var query = {
       handle: this.state.query
@@ -91,11 +98,12 @@ class Stats extends React.Component{
       error: function(err){
         context.setState({spinner: false, error: true});
         console.log(err);
-        console.log('queryUser failed');
       }
     });
   }
 
+  // Ajax request to the server to get the data for the specified TOPIC,
+  // Also starts the spinner animation, and if there is an error, displays an error message.
   queryTopic(clientUserName) {
     this.setState({spinner: true, error: false});
     console.log('queryTopic called')
@@ -116,29 +124,34 @@ class Stats extends React.Component{
       data: query,
       success: function(data){
         context.getData();
-        console.log('queryTopic succeeded');
       },
       error: function(err){
         context.setState({spinner: false, error: true});
         console.log(err);
-        console.log('queryTopic failed');
       }
     });
+  }
+
+  // Ajax request to the server to get the data for the specificed LOCATION,
+  // Also starts the spinner animation, and if there is an error, displays an error message.
+  queryLocation() {
+    
   }
 
   render() {
     return(
       <div>
-
-        <StatsNav
-          error={this.state.error}
-          spinner={this.state.spinner}
-          formVal={this.state.query}
-          getUserClick={this.queryTopic}
+        <StatsNav 
+          error={this.state.error} 
+          spinner={this.state.spinner} 
+          formVal={this.state.query} 
+          getUserClick={this.handleQueryType}
           formChange={this.handleChange}
           handleSearchTypeChange={this.handleSearchTypeChange}
         />
-        <StatsBody list={this.state.list} />
+        <StatsBody 
+          list={this.state.list}
+        />
         <StatsFoot />
       </div>
     );

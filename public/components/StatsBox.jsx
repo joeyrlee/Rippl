@@ -6,15 +6,29 @@ import { Col, Row, Card, CardPanel } from 'react-materialize';
 class StatsCard extends React.Component{
   constructor(props){
   	super(props);
+
+    this.inactiveUser = this.inactiveUser.bind(this);
+  }
+
+  inactiveUser() {
+    return 'Selected Twitter Handle Inactive';
   }
 
   render(){
-    // console.log("I'm in StatsCard. this.props.score: ",this.props.score);
+    console.log("StatsBox");
   	return (
       <div className="statsbox">
         <Row>
           <Col s={3} m={3} l={3}>
-            <p id="scoreColor" style={{color:this.props.color}}>Rippl Score: 1000{this.props.score ? Math.floor(this.props.score * 1000) : 'Calculating...'}</p>
+            <p id="scoreColor" 
+               style={{color:this.props.color,
+                       display:'inline-block',
+                       width: '1250px'}}
+                >Rippl Score: {
+                  this.props.score 
+                  ? Math.floor(this.props.score * 1000) 
+                  : this.inactiveUser()}
+            </p>
           </Col>
         </Row>
       </div>

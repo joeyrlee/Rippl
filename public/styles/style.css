@@ -17,14 +17,14 @@ body {
 
 /*StatsBody positioning*/
 .statsbody {
-	padding-left: 0.8rem;
+	padding: 0px 7px 55px 7px;
 	height: 86vh;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 
 /*Overwrites title color of cards*/
 .card-title.grey-text.text-darken-4 {
-  color: #ffab40 !important
+  color: #ffab40 !important;
 }
 
 /*Spinner positioning*/

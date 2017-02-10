@@ -37,7 +37,7 @@ module.exports = {
     .then((sentiment) => {
       globalsentiment = sentiment;
       console.log('response ==>', sentiment);
-      return User.findOne({username: currentUser});
+      return User.findOne({where: {username: currentUser}});
     })
     .then(function(user) {
       console.log('CREATING SCORE');
@@ -131,7 +131,7 @@ module.exports = {
   getUserScores: function(req, res, next) {
     // console.log('Username param: ' + req.params.username);
     let username = req.params.username || 'RipplMaster';
-
+    console.log('getUserScores: ',username)
     User.findOrCreate({where: { username: username }})
 
     .then(function(user) {
