@@ -28,7 +28,10 @@ class StatsNav extends React.Component{
 
   // Handles click on Get User Button
   handleClick() {
-    this.props.getUserClick();
+    console.log('click handler in StatsNav')
+    var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
+    // KG: send with JSON.parse(window.localStorage.profile).screen_name;
+    this.props.getUserClick(clientUserName);
   }
 
   render(){

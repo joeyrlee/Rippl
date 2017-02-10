@@ -26,7 +26,6 @@ class Stats extends React.Component{
     this.queryLocation = this.queryLocation.bind(this);
   }
 
-
   // This function gets all the user data for user RipplMaster (default user),
   // stops the spinner animation, and if there is an error displays an error message.
   getData() {
@@ -105,13 +104,18 @@ class Stats extends React.Component{
 
   // Ajax request to the server to get the data for the specified TOPIC,
   // Also starts the spinner animation, and if there is an error, displays an error message.
-  queryTopic() {
+  queryTopic(clientUserName) {
     this.setState({spinner: true, error: false});
+    console.log('queryTopic called')
+    console.log(clientUserName);
     var context = this;
     var query = {
       topic: this.state.query,
-      location: this.state.location
+      location: this.state.location,
+      clientUserName: clientUserName
     };
+    // console.log('query ==> ');
+    // console.log(query);
     this.setState({query: ''});
     $.ajax({
       method: 'GET',

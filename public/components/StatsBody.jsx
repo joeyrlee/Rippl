@@ -8,6 +8,7 @@ class StatsBody extends React.Component {
   }
 
   render(){
+    console.log('StatsBody');
   	return (
       <div className="statsbody">
       	{this.props.list.map((user) => <StatsCard user={user} />) }

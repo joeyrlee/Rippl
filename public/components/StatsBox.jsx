@@ -15,7 +15,7 @@ class StatsCard extends React.Component{
   }
 
   render(){
-    // console.log("I'm in StatsCard. this.props.score: ",this.props.score);
+    console.log("StatsBox");
   	return (
       <div className="statsbox">
         <Row>
