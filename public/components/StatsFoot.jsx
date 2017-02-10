@@ -14,7 +14,11 @@ class StatsFoot extends React.Component{
   	return(
   	  <Footer
         moreLinks={
-          <a onClick={this.handleClick()} className="grey-text text-lighten-4 right" href="/">Logout</a>
+          <a 
+            onClick={this.handleClick()} 
+            className="grey-text text-lighten-4 right" 
+            href="/">Logout
+          </a>
         }
         links={
           <ul>
