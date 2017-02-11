@@ -69,6 +69,7 @@ module.exports = {
 
     getTweetsByTopicAsync(topic, location)
     .spread((data, response) => {
+
       globaldata = data;
       globalTweetString = twitterUtil.getTweetStringForTopic(globaldata);
       return getSentimentAsync(twitterHandle, globalTweetString);
