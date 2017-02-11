@@ -80,7 +80,6 @@ module.exports = {
     var topic = req.query.topic
     var location = req.query.location
 
-
     // adds search radious of 10km
     if (geoString) {
       geoString += ',10km'
@@ -88,7 +87,6 @@ module.exports = {
 
     //Dev Note: twitterHandle needs to be removed after branch that implements no duplicates is added. Breaks now without it.
     var twitterHandle;
-
 
     getTweetsByTopicAsync(topic, geoString)
     .spread((data, response) => {
@@ -109,7 +107,7 @@ module.exports = {
       //return Score.create({
       return Score.create({
         topic: topic,
-        location: location,
+        location: geoString,
         tweetText: globalTweetString,
         sentimentScore: globalsentiment,
       })
