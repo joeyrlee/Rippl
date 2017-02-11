@@ -82,8 +82,10 @@ class Stats extends React.Component{
   queryHandle() {
     this.setState({spinner: true, error: false});
     var context = this;
+    var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
     var query = {
-      handle: this.state.query
+      handle: this.state.query,
+      clientUserName: clientUserName
     };
     this.setState({query: ''});
     $.ajax({
