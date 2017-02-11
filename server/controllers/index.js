@@ -12,11 +12,10 @@ var getSentimentAsync = Promise.promisify(havenUtil.getSentiment, {context: have
 module.exports = {
   getHandleAnalysis: function(req, res, next) {
     console.log('getHandleAnalysis CALLED');
-
+    console.log('request', req.params);
     // reads variables off query string
     var twitterHandle = req.query.handle;
     var clientUserName = req.query.clientUserName;
-
     var globaldata, globaltweetData, globalsentiment;
 
     getTweetsAsync(twitterHandle)
@@ -31,18 +30,23 @@ module.exports = {
       return User.findOne({where: {username: clientUserName}});
     })
     .then(function(user) {
-      console.log('CREATING SCORE -----------', user.id);
-
+      //console.log('CREATING SCORE -----------', user.id);
+      console.log('handle: ',  twitterHandle);
+      console.log('username: ',  clientUserName);
       return Score.findOne({where: {twitterHandle: twitterHandle,
-                                    UserID: user.id}})
+                                    username: clientUserName}})
         .then((Score) => {
+          console.log('handle: ', twitterHandle);
+          console.log('user: ', clientUserName);
+          console.log('found twitter handle ------------------');
            return Score.update({
-            twitterHandle: twitterHandle,
-            numTweets: globaldata.length,
-            tweetText: globaltweetData.string,
-            sentimentScore: globalsentiment,
-            retweetCount: globaltweetData.retweetCount,
-            favoriteCount: globaltweetData.favoriteCount
+              username: clientUserName,
+              twitterHandle: twitterHandle,
+              numTweets: globaldata.length,
+              tweetText: globaltweetData.string,
+              sentimentScore: globalsentiment,
+              retweetCount: globaltweetData.retweetCount,
+              favoriteCount: globaltweetData.favoriteCount
            })
         .then((newScore) => newScore.setUser(user.id)
         .then((newScore) => newScore));
@@ -52,19 +56,22 @@ module.exports = {
       return res.status(200).json(newScore);
     })
     .catch((err) => {
-      console.error('Analysis error ');
+      console.error('Analysis error ', err);
       return Score.create({
-        UserID: user.id,
+        username: clientUserName,
         twitterHandle: twitterHandle,
         numTweets: globaldata.length,
         tweetText: globaltweetData.string,
         sentimentScore: globalsentiment,
         retweetCount: globaltweetData.retweetCount,
         favoriteCount: globaltweetData.favoriteCount
-      }).then((score) => {
+      }).then((newScore) => newScore.setUser(user.id)
+        .then((newScore) => newScore)).
+      then((score) => {
         console.log('65 -----------------------', score);
         return res.status(200).json(score);
       }).catch((err) => {
+        console.log('72----------------');
         return res.status(404).end();
     });
   });

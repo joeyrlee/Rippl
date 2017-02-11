@@ -1,5 +1,7 @@
 var Sequelize = require('sequelize');
-var db = new Sequelize('rippl', 'root', '');
+var db = new Sequelize('rippl', 'root', '', {
+  logging: false
+});
 
 // we define the models we need using js
 var Session = db.define('Session', {
@@ -18,6 +20,7 @@ var User = db.define('User', {
 });
 
 var Score = db.define('Score', {
+  username: Sequelize.STRING,
   twitterHandle: Sequelize.STRING,
   location: Sequelize.STRING,
   topic: Sequelize.STRING,
@@ -25,8 +28,16 @@ var Score = db.define('Score', {
   tweetText: Sequelize.TEXT,
   sentimentScore: Sequelize.FLOAT,
   retweetCount: Sequelize.INTEGER,
-  favoriteCount: Sequelize.INTEGER  
+  favoriteCount: Sequelize.INTEGER
 });
+ // username: clientUserName,
+ //        twitterHandle: twitterHandle,
+ //        numTweets: globaldata.length,
+ //        tweetText: globaltweetData.string,
+ //        sentimentScore: globalsentiment,
+ //        retweetCount: globaltweetData.retweetCount,
+ //        favoriteCount: globaltweetData.favoriteCount
+
 
 // enables bi-directional associations between Users and Scores
 User.hasMany(Score);
