@@ -27,11 +27,20 @@ class StatsNav extends React.Component{
     this.setState({'selected': event.target.value});
   }
 
+  handleErrorMessage() {
+    if (this.state.selected === 'twitterHandle') {
+      return 'No Such Twitter Handle Found';
+    } else if (this.state.selected === 'topic') {
+      return 'No Such Topic Found'
+    } else {
+      return 'No Such Topic And/Or Location Found'
+    }
+  }
+
   // Handles click on Get User Button
   handleClick() {
     console.log('click handler in StatsNav')
     var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
-    // KG: send with JSON.parse(window.localStorage.profile).screen_name;
     this.props.getUserClick(clientUserName);
   }
 
@@ -99,7 +108,7 @@ class StatsNav extends React.Component{
         </NavItem>
 
         {this.props.spinner ? <NavItem><StatSpinner /></NavItem> : ''}
-        {this.props.error ? <NavItem>Invalid Twitter Handle</NavItem> : ''}
+        {this.props.error ? <NavItem>{this.handleErrorMessage()}</NavItem> : ''}
 
 
         {this.state.selected === 'location' ? 

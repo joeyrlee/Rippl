@@ -54,7 +54,7 @@ class StatsCard extends React.Component{
 
     //high color = green
     if (score * 1000 >= 600) {
-      return '#8bc34a';
+      return '#1fff00';
     //medium color = yellow
     } else if (score < 600 && score > 0) {
       return 'yellow';
