@@ -70,10 +70,8 @@ class Stats extends React.Component{
   handleQueryType() {
     if (this.state.queryType === 'twitterHandle') {
       this.queryHandle();
-    } else if (this.state.queryType === 'topic') {
-      this.queryTopic();
     } else {
-      this.queryLocation();
+      this.queryTopic();
     }
   }
 
