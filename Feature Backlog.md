@@ -7,18 +7,23 @@ Key:
 -delete compiled folder and iron out gitignore
 
 
+Bug Fixes:
+1)The `list` state variable populated in and passed down from Stats.jsx is currently (incorrectly) always populating a `twitterHandle` property with the search entry. In former code versions, the title would render differently (with or without an '@'; see StatsCard.jsx's `getTitle` function) depending on the existence of the properties `twitterHandle`, `topic`, and `location` on the `list` state variable in Stats.jsx
+
+
 Features:
 *****Client/UX:
-1)Change `location` in search radio button to `topic by location` (we're currently also seeking an enterprise partnership with GNIP for realtime location data to utilize instead of or in addition to this)
+1)Seek out a way - if possible - to correctly capitalize the characters of twitter handles in user titles (instead of generically using the `capitalizer` function in StatsCard.jsx)
+2)Change `location` in search radio button to `topic by location` (we're currently also seeking an enterprise partnership with GNIP for realtime location data to utilize instead of or in addition to this)
 --conditionally render a second search bar labeled with "location" - separated by a colon or the words "in" (the first search bar will be still labeled "topic")
-2)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
+3)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
 -"Are you making waves?" OR "Find out what's making waves" OR "What's making waves near you?"
-3)StatsCard entries:
+4)StatsCard entries:
 -X button at the top right to change `display` style of entry to `none` on the dom
 -change the orange text between twitter handle, topic, and location
-4)Basic Website flavicon
-5)Overloading the Nav component with NavItems distorts how the individual StatsCards appear on the page - diagnose this
-6)Change the `selected twitter handle inactive` text upon failed score loading to something better (e.g. 
+5)Basic Website flavicon
+6)Overloading the Nav component with NavItems distorts how the individual StatsCards appear on the page - diagnose this
+7)Change the `selected twitter handle inactive` text upon failed score loading to something better (e.g. 
 an equivolent to the StatsNav's "Invalid Twitter Handle")
 
 
