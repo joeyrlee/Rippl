@@ -19,7 +19,6 @@ module.exports = {
 
     var globaldata, globaltweetData, globalsentiment;
 
-
     getTweetsAsync(twitterHandle)
     .spread((data, response) => {
       globaldata = data;
@@ -34,14 +33,16 @@ module.exports = {
     .then(function(user) {
       console.log('CREATING SCORE');
 
-      return Score.create({
-        twitterHandle: twitterHandle,
-        numTweets: globaldata.length,
-        tweetText: globaltweetData.string,
-        sentimentScore: globalsentiment,
-        retweetCount: globaltweetData.retweetCount,
-        favoriteCount: globaltweetData.favoriteCount
-      })
+      return Score.findOne({where: {twitterHandle: twitterHandle}})
+        .then((Score) => {
+           return Score.update({
+            twitterHandle: twitterHandle,
+            numTweets: globaldata.length,
+            tweetText: globaltweetData.string,
+            sentimentScore: globalsentiment,
+            retweetCount: globaltweetData.retweetCount,
+            favoriteCount: globaltweetData.favoriteCount
+           })
         .then((newScore) => newScore.setUser(user.id)
         .then((newScore) => newScore));
     })
@@ -51,8 +52,20 @@ module.exports = {
     })
     .catch((err) => {
       console.error('Analysis error ');
-      return res.status(404).end();
+      return Score.create({
+        twitterHandle: twitterHandle,
+        numTweets: globaldata.length,
+        tweetText: globaltweetData.string,
+        sentimentScore: globalsentiment,
+        retweetCount: globaltweetData.retweetCount,
+        favoriteCount: globaltweetData.favoriteCount
+      }).then((newScore) => {
+        return res.status(200).json(newScore);
+      }).catch((err) => {
+        return res.status(404).end();
     });
+  });
+  })
   },
 
 
@@ -82,14 +95,7 @@ module.exports = {
 
       return Score.findOne({where: {twitterHandle: twitterHandle}})
       .then((score) => {
-        console.log('96 found ---------- and updating: ', score);
-        return Score.update({
-          topic: topic,
-          location: location,
-          tweetText: globalTweetString,
-          sentimentScore: globalsentiment,
-      }).catch((error) => {
-        console.log('105 not found and creating')
+
       //return Score.create({
       return Score.create({
         topic: topic,
@@ -97,7 +103,7 @@ module.exports = {
         tweetText: globalTweetString,
         sentimentScore: globalsentiment,
       })
-    })
+
         .then((newScore) => newScore.setUser(user.id)
         .then((newScore) => newScore));
     })
