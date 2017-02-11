@@ -31,9 +31,10 @@ module.exports = {
       return User.findOne({where: {username: clientUserName}});
     })
     .then(function(user) {
-      console.log('CREATING SCORE');
+      console.log('CREATING SCORE -----------', user.id);
 
-      return Score.findOne({where: {twitterHandle: twitterHandle}})
+      return Score.findOne({where: {twitterHandle: twitterHandle,
+                                    UserID: user.id}})
         .then((Score) => {
            return Score.update({
             twitterHandle: twitterHandle,
@@ -53,14 +54,16 @@ module.exports = {
     .catch((err) => {
       console.error('Analysis error ');
       return Score.create({
+        UserID: user.id,
         twitterHandle: twitterHandle,
         numTweets: globaldata.length,
         tweetText: globaltweetData.string,
         sentimentScore: globalsentiment,
         retweetCount: globaltweetData.retweetCount,
         favoriteCount: globaltweetData.favoriteCount
-      }).then((newScore) => {
-        return res.status(200).json(newScore);
+      }).then((score) => {
+        console.log('65 -----------------------', score);
+        return res.status(200).json(score);
       }).catch((err) => {
         return res.status(404).end();
     });
