@@ -11,28 +11,27 @@ Features:
 *****Client/UX:
 1)Implement functionality in the 3rd search option (topic by location) with user-entered topics and geo-coordinates
 -to be changed shortly thereafter to incorporate Google's geocode API for location name/address to geo-coord. conversion
-2)Persist logins so that on page refresh, you don't have to re-login every time (or ever, at least cookies are cleared or until logout is clicked)
-3)Seek out a way - if possible - to correctly capitalize the characters of twitter handles in user titles (instead of generically using the `capitalizer` function in StatsCard.jsx)
+2)There should be route handling for /login and /home routes to re-direct to just '/' (this ties in with the "Client/UX To-do: Persist logins")
+3)Persist logins so that on page refresh, you don't have to re-login every time (or ever, at least cookies are cleared or until logout is clicked)
 4)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
 -"Are you making waves?" OR "Find out what's making waves" OR "What's making waves near you?"
-5)StatsCard entries:
+5)Seek out a way - if possible - to correctly capitalize the characters of twitter handles in user titles (instead of generically using the `capitalizer` function in StatsCard.jsx)
+6)StatsCard entries:
 -X button at the top right to change `display` style of entry to `none` on the dom
--change the orange text between twitter handle, topic, and location
 6)Basic Website flavicon
 7)Allow users to control the sample size (within reason) by which the sentiment scores are calculated
-8)Overloading the Nav component with NavItems distorts how the individual StatsCards appear on the page - diagnose this
-9) KG: change get to post requests
 
 
 *****Server:
-1)See Client/UX feature #1
-1)See Client/UX feature #3
+1)See Client/UX feature #1 (Google geocode API coord. conversion)
+2)See Client/UX feature #2-3 ('/login' and '/home' route handling/re-directing when already logged in)
+3)See Client/UX feature #5
 
 
 
 *****Auth0/Sessions/Tokens:
 1)See #2 in Client/UX
-2)See # regarding persisting DELETIONS of saved card entries removed from the dom via the 'x' bottom at the top right of each card
+2)See #6 regarding persisting DELETIONS of saved card entries removed from the dom via the 'x' bottom at the top right of each card
 3)refactor api usage model to `streaming` to remove 15 tweets / 15 minutes api key limitations
 
 
