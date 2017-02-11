@@ -124,6 +124,7 @@ class Stats extends React.Component{
       dataType: 'json',
       data: query,
       success: function(data){
+        console.log('117 ------------');
         context.getData();
       },
       error: function(err){
