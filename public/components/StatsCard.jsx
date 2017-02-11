@@ -22,12 +22,15 @@ class StatsCard extends React.Component{
     //if the sentiment score is for a user
     if (this.props.user.twitterHandle) {
       return '@' + capitalizer(this.props.user.twitterHandle);
+
     //if the sentiment score is for a topic
     } else if (this.props.user.topic) {
-      return '#' + capitalizer(this.props.user.topic);
+
+      var locationStr = this.props.user.location ? ' Location: '
+        + this.props.user.location : ' ';
+
+      return '#' + capitalizer(this.props.user.topic) + ' ' + ' #' + locationStr;
     //else the sentiment score must be for a location
-    } else {
-      return capitalizer(this.props.user.location);
     }
   }
 
@@ -38,7 +41,7 @@ class StatsCard extends React.Component{
     //if the sentiment score is for a topic
     } else if (this.props.user.topic) {
       return 'https://twitter.com/search?q='
-        + this.props.user.topic 
+        + this.props.user.topic
         + '&src=typd';
     //else the sentiment score must be for a location
     } else {
@@ -48,6 +51,10 @@ class StatsCard extends React.Component{
         + (()=>this.props.user.location.split(' ').join('%20'))()
         + '&src=typd'
     }
+  }
+
+  gotoLocation() {
+
   }
 
   getPositionType() {
@@ -85,14 +92,14 @@ class StatsCard extends React.Component{
   	return (
       <Col m={6} s={12}>
         <Card
-          className='blue-grey darken-1 white-text' 
-          textClassName='white-text' 
+          className='blue-grey darken-1 white-text'
+          textClassName='white-text'
           title={this.getTitle()}
-          actions={[<a href={this.getTwitterLink()}>To Twitter</a>]}
-        >
-          <StatsBox 
-            score={this.props.user.sentimentScore} 
-            retweet={this.props.user.retweetCount} 
+          actions={[<a href={this.getTwitterLink()}>To Twitter</a>
+          ]}>
+          <StatsBox
+            score={this.props.user.sentimentScore}
+            retweet={this.props.user.retweetCount}
             color={this.getScoreColor()}
             user={this.props.user}
           />
