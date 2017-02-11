@@ -27,9 +27,9 @@ Features:
 an equivolent to the StatsNav's "Invalid Twitter Handle")
 
 
+
 *****Server:
 1)See client feature #1
-
 
 *****Auth0:
 1)refactor api usage model to `streaming` to remove 15 tweets / 15 minutes api key limitations
