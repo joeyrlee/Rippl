@@ -50,19 +50,6 @@ class StatsCard extends React.Component{
     }
   }
 
-  getPositionType() {
-    //if the sentiment score is for a user
-    if (this.props.user.twitterHandle) {
-      return 'center';
-    //if the sentiment score is for a topic
-    } else if (this.props.user.topic) {
-      return 'left';
-    //else the sentiment score must be for a location
-    } else {
-      return 'right';
-    }
-  }
-
   getScoreColor() {
     let score = this.props.user.sentimentScore;
 
