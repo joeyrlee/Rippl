@@ -64,6 +64,7 @@ module.exports = {
     var location = req.query.location
     var topic = req.query.topic
     var twitterHandle = req.query.location
+    console.log('71 twitterHandle', twitterHandle);
     var clientUserName = req.query.clientUserName
 
     getTweetsByTopicAsync(topic, location)
@@ -77,12 +78,25 @@ module.exports = {
       return User.findOne({where: {username: clientUserName}});
     })
     .then(function(user) {
+
+      return Score.findOne({where: {twitterHandle: twitterHandle}})
+      .then((score) => {
+        console.log('96 found ---------- and updating: ', score);
+        return Score.update({
+          topic: topic,
+          location: location,
+          tweetText: globalTweetString,
+          sentimentScore: globalsentiment,
+      }).catch((error) => {
+        console.log('105 not found and creating')
+      //return Score.create({
       return Score.create({
         topic: topic,
         location: location,
         tweetText: globalTweetString,
         sentimentScore: globalsentiment,
       })
+    })
         .then((newScore) => newScore.setUser(user.id)
         .then((newScore) => newScore));
     })
@@ -94,6 +108,7 @@ module.exports = {
       console.log('Analysis error ');
       return res.status(404).end();
     });
+  })
   },
 
   getRequestToken: function(req, res, next) {
@@ -123,6 +138,7 @@ module.exports = {
       console.error('Error fetching user scores', err);
       res.status(404).end();
     });
+
   },
 
   createTestUser: function(req, res, next) {
