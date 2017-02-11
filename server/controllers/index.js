@@ -32,6 +32,7 @@ module.exports = {
     .then(function(user) {
       return Score.findOne({where: {twitterHandle: twitterHandle, UserID: user.id}})
         .then((Score) => {
+
            return Score.update({
             twitterHandle: twitterHandle,
             numTweets: globaldata.length,
@@ -59,10 +60,8 @@ module.exports = {
       }).then((newScore) => newScore.setUser(user.id)
         .then((newScore) => newScore)).
       then((score) => {
-        console.log('65 -----------------------', score);
         return res.status(200).json(score);
       }).catch((err) => {
-        console.log('72----------------');
         return res.status(404).end();
     });
   });
@@ -79,7 +78,6 @@ module.exports = {
     var topic = req.query.topic
 
     var twitterHandle = req.query.location
-    console.log('71 twitterHandle', twitterHandle);
 
     var clientUserName = req.query.clientUserName
     //Dev Note: twitterHandle needs to be removed after branch that implements no duplicates is added. Breaks now without it.
