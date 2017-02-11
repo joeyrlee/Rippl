@@ -14,22 +14,22 @@ Bug Fixes:
 Features:
 *****Client/UX:
 1)Seek out a way - if possible - to correctly capitalize the characters of twitter handles in user titles (instead of generically using the `capitalizer` function in StatsCard.jsx)
-2)Change `location` in search radio button to `topic by location` (we're currently also seeking an enterprise partnership with GNIP for realtime location data to utilize instead of or in addition to this)
---conditionally render a second search bar labeled with "location" - separated by a colon or the words "in" (the first search bar will be still labeled "topic")
-3)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
+2)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
 -"Are you making waves?" OR "Find out what's making waves" OR "What's making waves near you?"
-4)StatsCard entries:
+3)StatsCard entries:
 -X button at the top right to change `display` style of entry to `none` on the dom
 -change the orange text between twitter handle, topic, and location
-5)Basic Website flavicon
-6)Overloading the Nav component with NavItems distorts how the individual StatsCards appear on the page - diagnose this
-7)Change the `selected twitter handle inactive` text upon failed score loading to something better (e.g. 
+4)Basic Website flavicon
+5)Overloading the Nav component with NavItems distorts how the individual StatsCards appear on the page - diagnose this
+6)Change the `selected twitter handle inactive` text upon failed score loading to something better (e.g. 
 an equivolent to the StatsNav's "Invalid Twitter Handle")
-8) KG: change get to post requests
+
+
 
 
 *****Server:
 1)See client feature #1
+2)Change get requests to post requests (on client, and server routes);
 
 *****Auth0:
 1)refactor api usage model to `streaming` to remove 15 tweets / 15 minutes api key limitations
@@ -42,7 +42,8 @@ Stretch Features:
 Cookies/Tokens:
 -pull user's location and save to state variable on page load "<web address> wants to: Know your location"
 --pre-load coordinates into gmaps iframe if below is achieved
-
+-- Seek an enterprise partnership with GNIP for realtime location data to do location search without topic
+-- Protect against cross-site scripting
 
 Trending Topics feature/sidebar
 

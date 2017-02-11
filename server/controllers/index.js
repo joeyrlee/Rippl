@@ -70,22 +70,28 @@ module.exports = {
 
 
   getTopicAnalysis: function(req, res, next) {
-    console.log('getTopicAnalysis CALLED');
+    console.log('getTopicAnalysis CALLED ---------------------');
     console.log(req.query);
 
     // reads variables off query string
     var location = req.query.location
     var topic = req.query.topic
-    var twitterHandle = req.query.location
-    console.log('71 twitterHandle', twitterHandle);
     var clientUserName = req.query.clientUserName
+    //Dev Note: twitterHandle needs to be removed after branch that implements no duplicates is added. Breaks now without it.
+    var twitterHandle;
+
+
+    console.log('location ==> ', location)
+    console.log('topic ==> ', topic)
+    console.log('clientUserName ==> ', clientUserName)
+
 
     getTweetsByTopicAsync(topic, location)
     .spread((data, response) => {
 
       globaldata = data;
       globalTweetString = twitterUtil.getTweetStringForTopic(globaldata);
-      return getSentimentAsync(twitterHandle, globalTweetString);
+      return getSentimentAsync(null, globalTweetString);
     })
     .then((sentiment) => {
       globalsentiment = sentiment;

@@ -14,11 +14,13 @@ class Stats extends React.Component{
       queryType: 'twitterHandle', //twitterHandle, topic, or location
       location: undefined,
       list: [],
-      spinner: false
+      spinner: false,
+      conditionalQuery: ''
     }
 
     this.getData = this.getData.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleConditionalInputChange = this.handleConditionalInputChange.bind(this);
     this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
     this.queryHandle = this.queryHandle.bind(this);
     this.handleQueryType = this.handleQueryType.bind(this);
@@ -57,11 +59,16 @@ class Stats extends React.Component{
   // Handles changes in the input tag
   handleChange(event) {
     this.setState({query: event.target.value});
-    var context = this;
+  }
+
+  // Handles changes in the conditionally rendered input tag (for both topic/location search)
+  handleConditionalInputChange(event) {
+    this.setState({conditionalQuery: event.target.value});
   }
 
   //handles search type change (radio button selection)
   handleSearchTypeChange(event) {
+    console.log('handleSearchTypeChanged called in Stats.jsx')
     this.setState({'queryType': event.target.value});
   }
 
@@ -108,13 +115,18 @@ class Stats extends React.Component{
     console.log(JSON.parse(window.localStorage.profile).screen_name)
     this.setState({spinner: true, error: false});
     var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
-    console.log('defined clientUserName')
     var context = this;
     var query = {
-      topic: this.state.query,
-      location: this.state.location,
-      clientUserName: clientUserName
+      clientUserName: clientUserName,
     };
+    if (this.state.queryType === 'location') {
+      query['location'] = this.state.query,
+      query['topic'] = this.state.conditionalQuery
+    } else {
+      query['topic'] = this.state.query
+    }
+    console.log('inside queryTopic ---------------')
+    console.log(query);
     this.setState({query: ''});
     $.ajax({
       method: 'GET',
@@ -122,7 +134,7 @@ class Stats extends React.Component{
       dataType: 'json',
       data: query,
       success: function(data){
-        console.log('117 ------------');
+        console.log('queryTopic successful');
         context.getData();
       },
       error: function(err){
@@ -138,6 +150,12 @@ class Stats extends React.Component{
     
   }
 
+  logState() {
+    console.log('logState called')
+    var context = this;
+    console.log(context.state);
+  }
+
   render() {
     return(
       <div>
@@ -145,10 +163,13 @@ class Stats extends React.Component{
           error={this.state.error} 
           spinner={this.state.spinner} 
           formVal={this.state.query} 
+          conditionalformVal={this.state.conditionalQuery}
           getUserClick={this.handleQueryType}
           formChange={this.handleChange}
+          conditionalFormChange={this.handleConditionalInputChange}
           handleSearchTypeChange={this.handleSearchTypeChange}
         />
+        <button onClick={this.logState.bind(this)}>console.log(state)</button>
         <StatsBody 
           list={this.state.list}
         />
