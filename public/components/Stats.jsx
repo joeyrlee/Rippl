@@ -20,7 +20,7 @@ class Stats extends React.Component{
     this.getData = this.getData.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
-    this.queryUser = this.queryUser.bind(this);
+    this.queryHandle = this.queryHandle.bind(this);
     this.handleQueryType = this.handleQueryType.bind(this);
     this.queryTopic = this.queryTopic.bind(this);
     this.queryLocation = this.queryLocation.bind(this);
@@ -69,7 +69,7 @@ class Stats extends React.Component{
   // Acts as a switch for which query type to call based on the `queryType` state variable
   handleQueryType() {
     if (this.state.queryType === 'twitterHandle') {
-      this.queryUser();
+      this.queryHandle();
     } else if (this.state.queryType === 'topic') {
       this.queryTopic();
     } else {
@@ -79,7 +79,7 @@ class Stats extends React.Component{
 
   // Ajax request to the server to get the data for the specified TWITTERHANDLE,
   // Also starts the spinner animation, and if there is an error, displays an error message.
-  queryUser() {
+  queryHandle() {
     this.setState({spinner: true, error: false});
     var context = this;
     var query = {
@@ -93,7 +93,7 @@ class Stats extends React.Component{
       data: query,
       success: function(data){
         context.getData();
-        console.log('queryUser succeeded')
+        console.log('queryHandle succeeded')
       },
       error: function(err){
         context.setState({spinner: false, error: true});

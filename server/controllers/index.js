@@ -11,8 +11,8 @@ var getTweetsByTopicAsync = Promise.promisify(twitterUtil.getTweetsByTopic, {con
 var getSentimentAsync = Promise.promisify(havenUtil.getSentiment, {context: havenUtil});
 
 module.exports = {
-  getUserAnalysis: function(req, res, next) {
-    console.log('getUserAnalysis CALLED');
+  getHandleAnalysis: function(req, res, next) {
+    console.log('getHandleAnalysis CALLED');
 
     // reads twitterHandle off query string
     var twitterHandle = req.query.handle //|| 'defaultTwitterHandle';
@@ -132,11 +132,10 @@ module.exports = {
   getUserScores: function(req, res, next) {
     // console.log('Username param: ' + req.params.username);
     let username = req.params.username || 'RipplMaster';
-    console.log('getUserScores: ',username)
     User.findOrCreate({where: { username: username }})
-
     .then(function(user) {
-      return Score.findAll({UserId: user.id});
+      var userID = user[0].dataValues.id;
+      return Score.findAll({where: {UserId: userID}});
     })
     .then(function(scores) {
       res.status(200).json(scores);
