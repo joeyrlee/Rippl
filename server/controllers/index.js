@@ -60,7 +60,7 @@ module.exports = {
       return res.status(200).json(newScore);
     })
     .catch((err) => {
-      console.error('Analysis error ', err);
+      console.error('Analysis error ');
       return res.status(404).end();
     });
   },
@@ -75,9 +75,10 @@ module.exports = {
     var topic = req.query.topic
     var twitterHandle = req.query.location
     var clientUserName = req.query.clientUserName
-    
+
     console.log('topic ===>', topic);
     console.log('location ===>', location);
+    console.log('---------------------------------------------');
     console.log('clientUserName ===>', clientUserName);
 
     getTweetsByTopicAsync(topic, location) //(...args)

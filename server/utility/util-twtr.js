@@ -36,14 +36,11 @@ module.exports = {
     });
   },
 
-//KG: Working Here
+
   getTweetsByTopic: function(topic, location, callback) {
-    console.log("getTweetsByTopic called in util-twtr.js")
-    console.log('topic = ' + topic + ' location = ' + location);
     let accessToken = twitter.accessToken;
     let accessTokenSecret = twitter.accessTokenSecret;
-    // KG: Attempting without promises...
-    twitter.search({'q': topic, 'geocode': location}, accessToken, accessTokenSecret, function(err, data, response) {
+    twitter.search({'q': topic, 'geocode': location, count: 50}, accessToken, accessTokenSecret, function(err, data, response) {
       console.log('twitter search just returned');
       if (err) {
         console.log('getTweetsByTopic failed');
@@ -54,17 +51,6 @@ module.exports = {
         return callback(err, data, response);
       }
     })
-
-    // KG: Reimplement Async?
-    // twtrSearchAsync('tweets', {'q': topic}, accessToken, accessTokenSecret)
-    // .spread((data, response) => {
-    //   console.log('about ot do callback');
-    //   callback(null, data, response);
-    // })
-    // .catch((err) => {
-    //   console.error('Error retrieving tweets by topic', err);
-    //   callback(err);
-    // });
   },
 
   getRequestToken: function(req, res) {

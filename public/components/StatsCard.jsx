@@ -81,7 +81,7 @@ class StatsCard extends React.Component{
     }
   }
   render(){
-    console.log('StatsCard');
+    // console.log('StatsCard');
   	return (
       <Col m={6} s={12}>
         <Card
