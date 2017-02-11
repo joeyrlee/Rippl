@@ -4,7 +4,7 @@ Key:
 
 
 **********Bug Fixes:
-1)Searches by Twitter Handle currently aren't working - only searches by #Topic
+1)Invalid searches (may) eventually return the correct error message (its based on the selected radio button at the time of search), but it takes several minutes.
 
 
 Features:
