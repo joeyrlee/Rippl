@@ -20,7 +20,6 @@ var User = db.define('User', {
 });
 
 var Score = db.define('Score', {
-  username: Sequelize.STRING,
   twitterHandle: Sequelize.STRING,
   location: Sequelize.STRING,
   topic: Sequelize.STRING,
