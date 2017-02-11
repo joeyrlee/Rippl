@@ -9,22 +9,17 @@ Key:
 
 Features:
 *****Client/UX:
-0)Basic Website flavicon
-1)When a topic or location is entered, but with weird capitalization, output the prettified string using javascript
-2)Proceed locations with gps coords in a light gray (a la twitter fashion)
-3)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
-4)Overloading the Nav component with NavItems distorts how the individual StatsCards appear on the page - diagnose this
-5)StatsCard entries:
+1)Change `location` in search radio option to `topic by location`
+--conditionally render a second search bar labeled with "location" - separated by a colon or the words "in" (the first search bar will be still labeled "topic")
+2)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
+-"Are you making waves?" OR "Find out what's making waves" OR "What's making waves near you?"
+3)StatsCard entries:
+-X button at the top right to change `display` style of entry to `none` on the dom
 -change the orange text between twitter handle, topic, and location
--X button at the top right to change `display` style to `none` on the dom
-6)Change `location` in search radio option to `topic by location`
---conditionally render a second search bar labeled with "location" (the first will be labeled "topic")
-7)Change the `selected twitter handle inactive` text upon failed score loading to something better (e.g. 
+4)Basic Website flavicon
+5)Overloading the Nav component with NavItems distorts how the individual StatsCards appear on the page - diagnose this
+6)Change the `selected twitter handle inactive` text upon failed score loading to something better (e.g. 
 an equivolent to the StatsNav's "Invalid Twitter Handle")
-
-
-StatsFoot Bug:
---part of a bigger problem to do with screen resolution and current rendering resolution that persist across multiple app features
 
 
 *****Auth0:
