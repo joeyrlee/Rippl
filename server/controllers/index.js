@@ -12,11 +12,10 @@ var getSentimentAsync = Promise.promisify(havenUtil.getSentiment, {context: have
 module.exports = {
   getHandleAnalysis: function(req, res, next) {
     console.log('getHandleAnalysis CALLED');
-
+    console.log('request', req.params);
     // reads variables off query string
     var twitterHandle = req.query.handle;
     var clientUserName = req.query.clientUserName;
-
     var globaldata, globaltweetData, globalsentiment;
 
     getTweetsAsync(twitterHandle)
@@ -31,7 +30,7 @@ module.exports = {
       return User.findOne({where: {username: clientUserName}});
     })
     .then(function(user) {
-      console.log('CREATING SCORE');
+
 
       return Score.findOne({where: {twitterHandle: twitterHandle}})
         .then((Score) => {
@@ -51,6 +50,7 @@ module.exports = {
       return res.status(200).json(newScore);
     })
     .catch((err) => {
+
       console.error('Analysis error ');
       return Score.create({
         twitterHandle: twitterHandle,
@@ -59,9 +59,13 @@ module.exports = {
         sentimentScore: globalsentiment,
         retweetCount: globaltweetData.retweetCount,
         favoriteCount: globaltweetData.favoriteCount
-      }).then((newScore) => {
-        return res.status(200).json(newScore);
+      }).then((newScore) => newScore.setUser(user.id)
+        .then((newScore) => newScore)).
+      then((score) => {
+        console.log('65 -----------------------', score);
+        return res.status(200).json(score);
       }).catch((err) => {
+        console.log('72----------------');
         return res.status(404).end();
     });
   });
@@ -76,6 +80,10 @@ module.exports = {
     // reads variables off query string
     var location = req.query.location
     var topic = req.query.topic
+
+    var twitterHandle = req.query.location
+    console.log('71 twitterHandle', twitterHandle);
+
     var clientUserName = req.query.clientUserName
     //Dev Note: twitterHandle needs to be removed after branch that implements no duplicates is added. Breaks now without it.
     var twitterHandle;
