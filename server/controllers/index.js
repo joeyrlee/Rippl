@@ -30,9 +30,7 @@ module.exports = {
       return User.findOne({where: {username: clientUserName}});
     })
     .then(function(user) {
-
-
-      return Score.findOne({where: {twitterHandle: twitterHandle}})
+      return Score.findOne({where: {twitterHandle: twitterHandle, UserID: user.id}})
         .then((Score) => {
            return Score.update({
             twitterHandle: twitterHandle,
@@ -50,7 +48,6 @@ module.exports = {
       return res.status(200).json(newScore);
     })
     .catch((err) => {
-
       console.error('Analysis error ');
       return Score.create({
         twitterHandle: twitterHandle,
