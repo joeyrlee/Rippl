@@ -9,7 +9,7 @@ Key:
 
 Features:
 *****Client/UX:
-1)Change `location` in search radio option to `topic by location`
+1)Change `location` in search radio button to `topic by location` (we're currently also seeking an enterprise partnership with GNIP for realtime location data to utilize instead of or in addition to this)
 --conditionally render a second search bar labeled with "location" - separated by a colon or the words "in" (the first search bar will be still labeled "topic")
 2)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
 -"Are you making waves?" OR "Find out what's making waves" OR "What's making waves near you?"
