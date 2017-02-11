@@ -10,7 +10,6 @@ class StatsCard extends React.Component{
     this.getTitle = this.getTitle.bind(this);
     this.getTwitterLink = this.getTwitterLink.bind(this);
     this.getScoreColor = this.getScoreColor.bind(this);
-    this.getPositionType = this.getPositionType.bind(this);
   }
 
   getTitle() {
