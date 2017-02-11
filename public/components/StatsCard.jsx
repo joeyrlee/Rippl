@@ -24,7 +24,7 @@ class StatsCard extends React.Component{
       return '@' + capitalizer(this.props.user.twitterHandle);
     //if the sentiment score is for a topic
     } else if (this.props.user.topic) {
-      return capitalizer(this.props.user.topic);
+      return '#' + capitalizer(this.props.user.topic);
     //else the sentiment score must be for a location
     } else {
       return capitalizer(this.props.user.location);
