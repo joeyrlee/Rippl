@@ -10,7 +10,7 @@ class Stats extends React.Component{
 
     this.state = {
       query: '', //entered text
-      // location: '33.517269,-86.808293,10km',
+      // location: '33.517269,-86.808293',
       queryType: 'twitterHandle', //twitterHandle, topic, or location
       location: undefined,
       list: [],
