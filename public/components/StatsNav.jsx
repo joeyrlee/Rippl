@@ -22,6 +22,7 @@ class StatsNav extends React.Component{
   }
 
   handleRadioSelect(event) {
+    console.log('handleRadioSelect clicked in StatsNav');
     this.props.handleSearchTypeChange(event);
     this.setState({'selected': event.target.value});
   }
@@ -33,6 +34,7 @@ class StatsNav extends React.Component{
     // KG: send with JSON.parse(window.localStorage.profile).screen_name;
     this.props.getUserClick(clientUserName);
   }
+
 
   render(){
   	return(
@@ -99,12 +101,13 @@ class StatsNav extends React.Component{
         {this.props.spinner ? <NavItem><StatSpinner /></NavItem> : ''}
         {this.props.error ? <NavItem>Invalid Twitter Handle</NavItem> : ''}
 
+
         {this.state.selected === 'location' ? 
           <NavItem>
             <Input
-              onChange={this.props.formChange}
+              onChange={this.props.conditionalFormChange}
               label="#Topic"
-              value={this.props.formVal}
+              value={this.props.conditionalFormVal}
             >
               <Icon>info_outline</Icon>
             </Input>
