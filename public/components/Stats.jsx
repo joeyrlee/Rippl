@@ -38,7 +38,7 @@ class Stats extends React.Component{
       url: 'http://localhost:3000/rippl/user/'+username,
       dataType: 'json',
       success: function(data) {
-        console.log('success!');
+        console.log('Data retrieved (ln. 41) from getData: ',data);
         context.setState({list: data.reverse(), spinner: false, error: false});
       },
       error: function(err){
