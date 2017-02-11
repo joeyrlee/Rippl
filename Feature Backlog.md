@@ -29,6 +29,7 @@ Features:
 1)See Client/UX feature #3
 
 
+
 *****Auth0/Sessions/Tokens:
 1)See #2 in Client/UX
 2)See # regarding persisting DELETIONS of saved card entries removed from the dom via the 'x' bottom at the top right of each card
@@ -39,10 +40,12 @@ Features:
 
 Stretch Features:
 Google map api iframe (select a location on the globe to simultaneously populate the search bar with a location)
+
 Additional persisting of user-specific location data:
 -pull user's location and save to state variable on page load "<web address> wants to: Know your location"
 --pre-load coordinates into gmaps iframe if below is achieved
 Trending Topics feature/sidebar
+
 Game mode: users estimate what 10(?) random topics, locations, and or celebrities' scores are and - like golf scores - the lowest are tracked on a daily basis
 
 
