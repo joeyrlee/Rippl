@@ -45,6 +45,13 @@ class StatsNav extends React.Component{
   }
 
 
+  handleImgClick() {
+    window.location =
+    'https://twitter.com/' +
+    JSON.parse(window.localStorage.profile).screen_name;
+
+  }
+
   render(){
   	return(
   	  <Navbar right>
@@ -53,14 +60,13 @@ class StatsNav extends React.Component{
         </NavItem>
 
         <NavItem>
-          <div 
+          <div
             style={{'height':'50px',
                     'position':'relative',
                     'top':'50%',
                     'transform':'translateY(17%)'}}
-            className='left'
-          >
-            <img
+            className='left'>
+            <img onClick={this.handleImgClick.bind(this)}
               src={JSON.parse(window.localStorage.profile).picture}
             />
           </div>
@@ -111,7 +117,7 @@ class StatsNav extends React.Component{
         {this.props.error ? <NavItem>{this.handleErrorMessage()}</NavItem> : ''}
 
 
-        {this.state.selected === 'location' ? 
+        {this.state.selected === 'location' ?
           <NavItem>
             <Input
               onChange={this.props.conditionalFormChange}
