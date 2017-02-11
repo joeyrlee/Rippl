@@ -25,7 +25,7 @@ Features:
 6)Overloading the Nav component with NavItems distorts how the individual StatsCards appear on the page - diagnose this
 7)Change the `selected twitter handle inactive` text upon failed score loading to something better (e.g. 
 an equivolent to the StatsNav's "Invalid Twitter Handle")
-
+8) KG: change get to post requests
 
 
 *****Server:
