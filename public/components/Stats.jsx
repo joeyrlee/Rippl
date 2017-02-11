@@ -20,7 +20,7 @@ class Stats extends React.Component{
     this.getData = this.getData.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSearchTypeChange = this.handleSearchTypeChange.bind(this);
-    this.queryUser = this.queryUser.bind(this);
+    this.queryHandle = this.queryHandle.bind(this);
     this.handleQueryType = this.handleQueryType.bind(this);
     this.queryTopic = this.queryTopic.bind(this);
     this.queryLocation = this.queryLocation.bind(this);
@@ -69,7 +69,7 @@ class Stats extends React.Component{
   // Acts as a switch for which query type to call based on the `queryType` state variable
   handleQueryType() {
     if (this.state.queryType === 'twitterHandle') {
-      this.queryUser();
+      this.queryHandle();
     } else if (this.state.queryType === 'topic') {
       this.queryTopic();
     } else {
@@ -79,11 +79,13 @@ class Stats extends React.Component{
 
   // Ajax request to the server to get the data for the specified TWITTERHANDLE,
   // Also starts the spinner animation, and if there is an error, displays an error message.
-  queryUser() {
+  queryHandle() {
     this.setState({spinner: true, error: false});
     var context = this;
+    var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
     var query = {
-      handle: this.state.query
+      handle: this.state.query,
+      clientUserName: clientUserName
     };
     this.setState({query: ''});
     $.ajax({
@@ -93,7 +95,7 @@ class Stats extends React.Component{
       data: query,
       success: function(data){
         context.getData();
-        console.log('queryUser succeeded')
+        console.log('queryHandle succeeded')
       },
       error: function(err){
         context.setState({spinner: false, error: true});
@@ -104,18 +106,17 @@ class Stats extends React.Component{
 
   // Ajax request to the server to get the data for the specified TOPIC,
   // Also starts the spinner animation, and if there is an error, displays an error message.
-  queryTopic(clientUserName) {
+  queryTopic() {
+    console.log(JSON.parse(window.localStorage.profile).screen_name)
     this.setState({spinner: true, error: false});
-    console.log('queryTopic called')
-    console.log(clientUserName);
+    var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
+    console.log('defined clientUserName')
     var context = this;
     var query = {
       topic: this.state.query,
       location: this.state.location,
       clientUserName: clientUserName
     };
-    // console.log('query ==> ');
-    // console.log(query);
     this.setState({query: ''});
     $.ajax({
       method: 'GET',
