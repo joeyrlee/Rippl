@@ -10,7 +10,7 @@ class StatsNav extends React.Component{
       selected: 'twitterHandle',
       labels: { //can be: Twitter Handle, Topic, or Location
         'twitterHandle': 'Twitter Handle',
-        'topic': 'Topic',
+        'topic': '#Topic',
         'location': 'Location'
       },
       icons: {
@@ -22,6 +22,7 @@ class StatsNav extends React.Component{
   }
 
   handleRadioSelect(event) {
+    console.log('handleRadioSelect clicked in StatsNav');
     this.props.handleSearchTypeChange(event);
     this.setState({'selected': event.target.value});
   }
@@ -33,6 +34,7 @@ class StatsNav extends React.Component{
     // KG: send with JSON.parse(window.localStorage.profile).screen_name;
     this.props.getUserClick(clientUserName);
   }
+
 
   render(){
   	return(
@@ -79,7 +81,7 @@ class StatsNav extends React.Component{
                 name='group1'
                 type='radio'
                 value='topic'
-                label='Topic'
+                label='#Topic'
                 className='left with-gap'
                 onClick={this.handleRadioSelect.bind(this)}
               />
@@ -88,7 +90,7 @@ class StatsNav extends React.Component{
                 name='group1'
                 type='radio'
                 value='location'
-                label='Location'
+                label='#Topic by Location'
                 className='left with-gap'
                 onClick={this.handleRadioSelect.bind(this)}
               />
@@ -99,6 +101,20 @@ class StatsNav extends React.Component{
         {this.props.spinner ? <NavItem><StatSpinner /></NavItem> : ''}
         {this.props.error ? <NavItem>Invalid Twitter Handle</NavItem> : ''}
 
+
+        {this.state.selected === 'location' ? 
+          <NavItem>
+            <Input
+              onChange={this.props.conditionalFormChange}
+              label="#Topic"
+              value={this.props.conditionalFormVal}
+            >
+              <Icon>info_outline</Icon>
+            </Input>
+          </NavItem>
+        : ''
+        }
+
         <NavItem>
           <Input
             onChange={this.props.formChange}
@@ -107,7 +123,9 @@ class StatsNav extends React.Component{
           >
             <Icon>{this.state.icons[this.state.selected]}</Icon>
           </Input>
+
         </NavItem>
+
 
         <NavItem>
           <Button

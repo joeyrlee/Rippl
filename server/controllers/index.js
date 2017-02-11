@@ -30,23 +30,17 @@ module.exports = {
       return User.findOne({where: {username: clientUserName}});
     })
     .then(function(user) {
-      //console.log('CREATING SCORE -----------', user.id);
-      console.log('handle: ',  twitterHandle);
-      console.log('username: ',  clientUserName);
-      return Score.findOne({where: {twitterHandle: twitterHandle,
-                                    username: clientUserName}})
+
+
+      return Score.findOne({where: {twitterHandle: twitterHandle}})
         .then((Score) => {
-          console.log('handle: ', twitterHandle);
-          console.log('user: ', clientUserName);
-          console.log('found twitter handle ------------------');
            return Score.update({
-              username: clientUserName,
-              twitterHandle: twitterHandle,
-              numTweets: globaldata.length,
-              tweetText: globaltweetData.string,
-              sentimentScore: globalsentiment,
-              retweetCount: globaltweetData.retweetCount,
-              favoriteCount: globaltweetData.favoriteCount
+            twitterHandle: twitterHandle,
+            numTweets: globaldata.length,
+            tweetText: globaltweetData.string,
+            sentimentScore: globalsentiment,
+            retweetCount: globaltweetData.retweetCount,
+            favoriteCount: globaltweetData.favoriteCount
            })
         .then((newScore) => newScore.setUser(user.id)
         .then((newScore) => newScore));
@@ -56,9 +50,9 @@ module.exports = {
       return res.status(200).json(newScore);
     })
     .catch((err) => {
-      console.error('Analysis error ', err);
+
+      console.error('Analysis error ');
       return Score.create({
-        username: clientUserName,
         twitterHandle: twitterHandle,
         numTweets: globaldata.length,
         tweetText: globaltweetData.string,
@@ -80,22 +74,32 @@ module.exports = {
 
 
   getTopicAnalysis: function(req, res, next) {
-    console.log('getTopicAnalysis CALLED');
+    console.log('getTopicAnalysis CALLED ---------------------');
     console.log(req.query);
 
     // reads variables off query string
     var location = req.query.location
     var topic = req.query.topic
+
     var twitterHandle = req.query.location
     console.log('71 twitterHandle', twitterHandle);
+
     var clientUserName = req.query.clientUserName
+    //Dev Note: twitterHandle needs to be removed after branch that implements no duplicates is added. Breaks now without it.
+    var twitterHandle;
+
+
+    console.log('location ==> ', location)
+    console.log('topic ==> ', topic)
+    console.log('clientUserName ==> ', clientUserName)
+
 
     getTweetsByTopicAsync(topic, location)
     .spread((data, response) => {
 
       globaldata = data;
       globalTweetString = twitterUtil.getTweetStringForTopic(globaldata);
-      return getSentimentAsync(twitterHandle, globalTweetString);
+      return getSentimentAsync(null, globalTweetString);
     })
     .then((sentiment) => {
       globalsentiment = sentiment;
