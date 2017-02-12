@@ -107,7 +107,7 @@ module.exports = {
       //return Score.create({
       return Score.create({
         topic: topic,
-        location: geoString,
+        location: location,
         tweetText: globalTweetString,
         sentimentScore: globalsentiment,
       })
