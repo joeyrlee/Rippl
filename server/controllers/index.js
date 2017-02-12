@@ -72,26 +72,25 @@ module.exports = {
 
 
   getTopicAnalysis: function(req, res, next) {
+    
     console.log('getTopicAnalysis CALLED ---------------------');
     console.log(req.query);
 
     // reads variables off query string
-    var location = req.query.location
-    var topic = req.query.topic
-
-    var twitterHandle = req.query.location
-
+    var geoString = req.query.coordinates
     var clientUserName = req.query.clientUserName
+    var topic = req.query.topic
+    var location = req.query.location
+
+    // adds search radious of 10km
+    if (geoString) {
+      geoString += ',10km'
+    }
+
     //Dev Note: twitterHandle needs to be removed after branch that implements no duplicates is added. Breaks now without it.
     var twitterHandle;
 
-
-    console.log('location ==> ', location)
-    console.log('topic ==> ', topic)
-    console.log('clientUserName ==> ', clientUserName)
-
-
-    getTweetsByTopicAsync(topic, location)
+    getTweetsByTopicAsync(topic, geoString)
     .spread((data, response) => {
 
       globaldata = data;
