@@ -70,13 +70,15 @@ module.exports = {
 
 
   getTopicAnalysis: function(req, res, next) {
+    
     console.log('getTopicAnalysis CALLED ---------------------');
     console.log(req.query);
 
     // reads variables off query string
-    var geoString = req.query.location
+    var geoString = req.query.coordinates
     var clientUserName = req.query.clientUserName
     var topic = req.query.topic
+    var location = req.query.location
 
 
     // adds search radious of 10km
@@ -86,11 +88,6 @@ module.exports = {
 
     //Dev Note: twitterHandle needs to be removed after branch that implements no duplicates is added. Breaks now without it.
     var twitterHandle;
-
-
-    console.log('geoString ==> ', geoString)
-    console.log('topic ==> ', topic)
-    console.log('clientUserName ==> ', clientUserName)
 
 
     getTweetsByTopicAsync(topic, geoString)
@@ -112,7 +109,7 @@ module.exports = {
       //return Score.create({
       return Score.create({
         topic: topic,
-        location: geoString,
+        location: location,
         tweetText: globalTweetString,
         sentimentScore: globalsentiment,
       })
