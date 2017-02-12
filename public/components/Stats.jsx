@@ -112,7 +112,6 @@ class Stats extends React.Component{
   // Ajax request to the server to get the data for the specified TOPIC,
   // Also starts the spinner animation, and if there is an error, displays an error message.
   queryTopic() {
-    console.log(JSON.parse(window.localStorage.profile).screen_name)
     this.setState({spinner: true, error: false});
     var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
     var context = this;
@@ -147,7 +146,7 @@ class Stats extends React.Component{
   // Ajax request to the server to get the data for the specificed LOCATION,
   // Also starts the spinner animation, and if there is an error, displays an error message.
   queryLocation() {
-    
+
   }
 
   logState() {
@@ -159,10 +158,10 @@ class Stats extends React.Component{
   render() {
     return(
       <div>
-        <StatsNav 
-          error={this.state.error} 
-          spinner={this.state.spinner} 
-          formVal={this.state.query} 
+        <StatsNav
+          error={this.state.error}
+          spinner={this.state.spinner}
+          formVal={this.state.query}
           conditionalformVal={this.state.conditionalQuery}
           getUserClick={this.handleQueryType}
           formChange={this.handleChange}
@@ -170,7 +169,7 @@ class Stats extends React.Component{
           handleSearchTypeChange={this.handleSearchTypeChange}
         />
         <button onClick={this.logState.bind(this)}>console.log(state)</button>
-        <StatsBody 
+        <StatsBody
           list={this.state.list}
         />
         <StatsFoot />
