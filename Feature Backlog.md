@@ -11,15 +11,15 @@ Features:
 *****Client/UX:
 1)Implement functionality in the 3rd search option (topic by location) with user-entered topics and geo-coordinates
 -to be changed shortly thereafter to incorporate Google's geocode API for location name/address to geo-coord. conversion
-2)There should be route handling for /login and /home routes to re-direct to just '/' (this ties in with the "Client/UX To-do: Persist logins")
-3)Persist logins so that on page refresh, you don't have to re-login every time (or ever, at least cookies are cleared or until logout is clicked)
-4)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
+2)Pithy explanation or tagline immediately to the right of the title explaining what the app does and is about
 -"Are you making waves?" OR "Find out what's making waves" OR "What's making waves near you?"
-5)Seek out a way - if possible - to correctly capitalize the characters of twitter handles in user titles (instead of generically using the `capitalizer` function in StatsCard.jsx)
-6)StatsCard entries:
+3)StatsCard entries:
 -X button at the top right to change `display` style of entry to `none` on the dom
-6)Basic Website flavicon
-7)Allow users to control the sample size (within reason) by which the sentiment scores are calculated
+4)Basic Website flavicon
+5)There should be route handling for /login and /home routes to re-direct to just '/' (this ties in with the "Client/UX To-do: Persist logins")
+6)Persist logins so that on page refresh, you don't have to re-login every time (or ever, at least cookies are cleared or until logout is clicked)
+7)Seek out a way - if possible - to correctly capitalize the characters of twitter handles in user titles (instead of generically using the `capitalizer` function in StatsCard.jsx)
+8)Allow users to control the sample size (within reason) by which the sentiment scores are calculated
 
 
 *****Server:
