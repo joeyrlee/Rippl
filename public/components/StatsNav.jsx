@@ -112,7 +112,6 @@ class StatsNav extends React.Component{
         {this.props.spinner ? <NavItem><StatSpinner /></NavItem> : ''}
         {this.props.error ? <NavItem>{this.handleErrorMessage()}</NavItem> : ''}
 
-
         {this.state.selected === 'location' ?
           <NavItem>
             <Input

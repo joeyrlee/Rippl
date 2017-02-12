@@ -44,7 +44,7 @@ class Stats extends React.Component{
       },
       error: function(err){
         context.setState({spinner: false, error: true});
-        console.log(err);
+        console.log('48', err);
       }
     });
   }
@@ -120,7 +120,7 @@ class Stats extends React.Component{
       },
       error: function(err){
         context.setState({spinner: false, error: true});
-        console.log(err);
+        console.log('107', err);
       }
     });
   }
@@ -131,7 +131,8 @@ class Stats extends React.Component{
     this.setState({spinner: true, error: false});
     var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
     var context = this;
-    this.geoCode(function(geoString) { 
+
+    this.geoCode(function(geoString) {
       console.log(JSON.parse(window.localStorage.profile).screen_name)
       context.setState({spinner: true, error: false});
       var clientUserName = JSON.parse(window.localStorage.profile).screen_name;
@@ -186,7 +187,7 @@ class Stats extends React.Component{
           conditionalFormChange={this.handleConditionalInputChange}
           handleSearchTypeChange={this.handleSearchTypeChange}
         />
-        <StatsBody 
+        <StatsBody
           list={this.state.list}
         />
         <StatsFoot />
