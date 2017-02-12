@@ -45,7 +45,7 @@ class Stats extends React.Component{
       },
       error: function(err){
         context.setState({spinner: false, error: true});
-        console.log(err);
+        console.log('48', err);
       }
     });
   }
@@ -104,7 +104,7 @@ class Stats extends React.Component{
       },
       error: function(err){
         context.setState({spinner: false, error: true});
-        console.log(err);
+        console.log('107', err);
       }
     });
   }
@@ -138,7 +138,7 @@ class Stats extends React.Component{
       },
       error: function(err){
         context.setState({spinner: false, error: true});
-        console.log(err);
+        console.log('141', err);
       }
     });
   }

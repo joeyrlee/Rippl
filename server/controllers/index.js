@@ -23,6 +23,8 @@ module.exports = {
       globaldata = data;
       globaltweetData = twitterUtil.getTweetString(globaldata);
       return getSentimentAsync(twitterHandle, globaltweetData.string);
+    }).catch((err) => {
+      res.status(404).end();
     })
     .then((sentiment) => {
       globalsentiment = sentiment;
@@ -154,7 +156,6 @@ module.exports = {
       console.error('Error fetching user scores', err);
       res.status(404).end();
     });
-
   },
 
   createTestUser: function(req, res, next) {
