@@ -21,14 +21,11 @@ class StatsCard extends React.Component{
     //if the sentiment score is for a user
     if (this.props.user.twitterHandle) {
       return '@' + capitalizer(this.props.user.twitterHandle);
-
     //if the sentiment score is for a topic
     } else if (this.props.user.topic) {
-
-      var locationStr = this.props.user.location ? ' Location: ' + this.props.user.location : ' ';
-
-      return '#' + capitalizer(this.props.user.topic) + ' ' + ' #' + locationStr;
-    //else the sentiment score must be for a location
+      return this.props.user.location
+        ? capitalizer(this.props.user.topic) + ' ... Location:' + this.props.user.location
+        : capitalizer(this.props.user.topic);
     }
   }
 
@@ -69,15 +66,33 @@ class StatsCard extends React.Component{
     }
   }
 
+  handleRemoveEntry(event) {
+    console.log('event: ', event.target);
+    var id = event.target.className;
+    document.getElementById(id).style.display = "none";
+  }
+
   render(){
     // console.log('StatsCard');
   	return (
       <Col m={6} s={12}>
         <Card
           className='blue-grey darken-1 white-text'
+          id={this.props.user.createdAt}
           textClassName='white-text'
           title={this.getTitle()}
-          actions={[<a href={this.getTwitterLink()}>To Twitter</a>]}
+          actions={[<a href={this.getTwitterLink()}>To Twitter</a>,
+                    <a href="#" 
+                       className={this.props.user.createdAt} 
+                       onClick={this.handleRemoveEntry.bind(this)}
+                       style={{color:'black',
+                               'height':'50px',
+                               'position':'relative',
+                               'top': '-120px',
+                               'left':'1515px',
+                               'transform':'translateY(17%)',
+                               'transform':'translateX(17%)'}}>X</a>
+          ]}
         >
           <StatsBox
             score={this.props.user.sentimentScore}
