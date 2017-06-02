@@ -1,6 +1,8 @@
 # Rippl
+A web app that visualizes sentiment analysis of user-inputted Twitter handles, locations, and topics within locations, helping you to choose users and topics that may - or may <em>not</em> - be worth following!
+
 ![Alt text](public/img/examplescreen.png)
-### getting started
+### Getting Started
 To get started, you will need some API keys to make everything work.  Please get API keys for the following:
 
 1. https://dev.twitter.com/
@@ -28,21 +30,4 @@ Finally, run
 ```javascript
 npm run twitterscript
 ```
-Once all these commands have been run, navigate to localhost:3000 to use the app.  From here, you are able to get a Rippl score for any twitter user.
-
-
-            React Component Tree:      index.jsx
-                      				    				|
-                      				  			  Stats
-                      				  			  	|
-                      		 StatsNav - StatsBody - StatsFoot
-                      			 	 |	       	|
-                      		StatSpinner		  |		
-                      				  		  		|
-                      					  	 	StatsCard
-                      					  	  		|
-                      					  		 StatsBox
-                      						  	    |
-                      						   StatSpinner
-
-React-Materialize components: Navbar, NavItem, Col, Row, Card, CardPanel, Input, Icon, Button, Preloader, Footer
+Once all these commands have been run, navigate to localhost:3000 to use the app. From here, you are able to get a Rippl score for any twitter user, topic, or topic as it pertains to an inputted location.
